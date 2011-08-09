@@ -30,7 +30,6 @@
   <url>http://feefighters.com/</url>
 
   <dependencies>
-    <!-- logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
@@ -41,6 +40,20 @@
       <artifactId>log4j</artifactId> 
       <version>1.2.16</version> 
     </dependency>
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId> 
+      <artifactId>xstream</artifactId> 
+      <version>1.4</version> 
+    </dependency>
+    
+    <!-- tests -->
+    <dependency>
+      <groupId>org.testng</groupId> 
+      <artifactId>testng</artifactId> 
+      <version>6.1.1</version>
+      <scope>test</scope> 
+    </dependency>      
+      
   </dependencies>
 
   <build>
