@@ -8,12 +8,10 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.converters.basic.BooleanConverter;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 import com.thoughtworks.xstream.converters.basic.IntConverter;
-import com.thoughtworks.xstream.converters.collections.CollectionConverter;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
-import com.thoughtworks.xstream.mapper.Mapper;
 
 public class XmlMarshaller {
 
@@ -49,8 +47,11 @@ public class XmlMarshaller {
 		}
 	}
 	
+	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z";
+	private static final String[] DATE_FORMATS = { };
 	static {		
-		xstream.registerConverter(new SingleValueConverterTypeWrapper(new DateConverter(), "datetime"));
+		
+		xstream.registerConverter(new SingleValueConverterTypeWrapper(new DateConverter(DEFAULT_DATE_FORMAT, DATE_FORMATS), "datetime"));
 		xstream.registerConverter(new SingleValueConverterTypeWrapper(new BooleanConverter(), "boolean"));
 		xstream.registerConverter(new SingleValueConverterTypeWrapper(new IntConverter(), "integer"));
 	}	
