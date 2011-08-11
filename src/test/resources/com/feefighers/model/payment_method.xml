@@ -1,0 +1,24 @@
+<payment_method>
+  <payment_method_token>56f0c882c4565da74d2a748e</payment_method_token>
+  <created_at type="datetime">2011-08-10 13:00:07 UTC</created_at>
+  <updated_at type="datetime">2011-08-10 13:00:07 UTC</updated_at>
+  <custom></custom>
+  <is_retained type="boolean">false</is_retained>
+  <is_redacted type="boolean">false</is_redacted>
+  <is_sensitive_data_valid type="boolean">false</is_sensitive_data_valid>
+  <messages type="array">
+    <message class="error" context="input.cvv" key="too_long"></message>
+  </messages>
+  <last_four_digits>1111</last_four_digits>
+  <card_type></card_type>
+  <first_name>Joe</first_name>
+  <last_name>FeeFighter</last_name>
+  <expiry_month type="integer">1</expiry_month>
+  <expiry_year type="integer">2011</expiry_year>
+  <address_1></address_1>
+  <address_2></address_2>
+  <city></city>
+  <state></state>
+  <zip></zip>
+  <country></country>
+</payment_method>
