@@ -26,7 +26,7 @@ public class Http {
 
     enum RequestMethod {
         GET, POST
-    }
+    }    
 
     private String username;
     private String password;
@@ -102,13 +102,13 @@ public class Http {
     
     public static void checkHttpStatus(HttpResponse response) {
     	int statusCode = response.getStatusLine().getStatusCode();
-        if (isErrorCode(statusCode)) {        	      	
+        if (isErrorCode(statusCode)) {
             throw new HttpException(statusCode);
         }
     }
 
     private static boolean isErrorCode(int responseCode) {
-        return responseCode != 200 && responseCode != 201 && responseCode != 422;
+        return responseCode != 200 && responseCode != 201 && responseCode != 422 && responseCode != 302;
     }
     
     public static void enableDebug() {
