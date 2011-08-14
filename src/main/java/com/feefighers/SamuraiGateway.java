@@ -33,7 +33,7 @@ public class SamuraiGateway implements Serializable {
 	}	
 	
 	public Processor processor() {
-		return new ProcessorImpl(new Http(merchantKey, merchantPassword, "https://samurai.feefighters.com/v1"));
+		return new ProcessorImpl(this, new Http(merchantKey, merchantPassword, "https://samurai.feefighters.com/v1"));
 	}
 	
 }

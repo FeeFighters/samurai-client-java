@@ -7,7 +7,7 @@ public interface Processor {
 	
 	PaymentMethod find(String paymentMethodToken);
 			
-	void purchase(String paymentMethodToken, double amount, Options options);
+	String purchase(String paymentMethodToken, double amount, Options options);
 	
-	void authorize(String paymentMethodToken, double amount, Options options);
+	String authorize(String paymentMethodToken, double amount, Options options);
 }
