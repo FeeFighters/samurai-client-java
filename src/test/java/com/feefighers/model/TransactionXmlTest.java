@@ -1,5 +1,8 @@
 package com.feefighers.model;
 
+import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,7 +11,7 @@ public class TransactionXmlTest {
 	@Test
 	public void shouldSerializeEmptyTransaction() {
 		// given
-		final Transaction emptyTransaction = new Transaction();
+		final Transaction emptyTransaction = new Transaction(null);
 		
 		// when
 		final String xml = emptyTransaction.toXml();
@@ -24,4 +27,18 @@ public class TransactionXmlTest {
 		Assert.assertEquals(transaction.getPaymentMethodToken(),	emptyTransaction.getPaymentMethodToken());
 		Assert.assertEquals(transaction.getType(), 					emptyTransaction.getType());
 	}
+	
+
+	@Test
+	public void shouldDeserializeTransaction() throws IOException {
+		// given
+		final String xml = IOUtils.toString(getClass().getResourceAsStream("transaction.xml"));
+		
+		// when
+		final Transaction object = Transaction.fromXml(xml);
+		final String outputXml = object.toXml(); 
+		
+		// then
+		Assert.assertEquals(outputXml.trim(), xml.trim());
+	}	
 }
