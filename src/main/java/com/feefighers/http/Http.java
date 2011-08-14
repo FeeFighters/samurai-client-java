@@ -56,6 +56,7 @@ public class Http {
 			HttpParams httpParams = new BasicHttpParams();
 			HttpProtocolParams.setVersion(httpParams, HttpVersion.HTTP_1_1);
 			HttpProtocolParams.setContentCharset(httpParams, "UTF-8");
+			HttpProtocolParams.setUserAgent(httpParams, "Samurai Java Client");
 			
 			client = new DefaultHttpClient(httpParams);
 
