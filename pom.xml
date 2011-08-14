@@ -24,7 +24,7 @@
   <groupId>com.feefighers</groupId>
   <artifactId>samurai</artifactId>
   <packaging>jar</packaging>
-  <version>0.1</version>
+  <version>0.1-SNAPSHOT</version>
 
   <name>Samurai Client Java</name>
   <url>http://feefighters.com/</url>
