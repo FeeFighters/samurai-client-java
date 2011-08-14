@@ -1,38 +1,79 @@
 package com.feefighers.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.XStreamer;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
+@XStreamAlias("transaction")
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String amount;
-	private String type;
-	private String paymentMethodToken;
-	private String currencyCode;
-	private String descriptor;
-	private String custom;
-	private String customerReference;
-	private String billingReference;
+	public enum TransactionType {
+		Purchase, authorize
+	}
 	
-	private static XStream xstream = new XStream(new StaxDriver()); 
+	@XStreamAlias("reference_id") 
+	private String referenceId; // response
+	
+	@XStreamAlias("transaction_token")
+	private String transactionToken; // response
+	
+	@XStreamAlias("created_at")
+	private Date createdAt; // response	
+
+	@XStreamAlias("descriptor")
+	private String descriptor; // request
+	
+	@XStreamAlias("custom")
+	private String custom; // request	
+
+	@XStreamAlias("billing_reference")
+	private String billingReference; // request
+	
+	@XStreamAlias("customer_reference")
+	private String customerReference; // request
+
+	@XStreamAlias("transaction_type")
+	private TransactionType type; // request
+		
+	@XStreamAlias("amount")
+	private String amount; // request
+
+	@XStreamAlias("currency_code")
+	private String currencyCode; // request		
+	
+	@XStreamAlias("processor_token")
+	private String processor_token; // response
+		
+	@XStreamAlias("processor_response")
+	private ProcessorResponse processorResponse; // response
+
+	@XStreamAlias("payment_method")
+	private PaymentMethod paymentMethod; // response
+	
+	@XStreamAlias("payment_method_token")
+	private String paymentMethodToken; // request	
 	
 	static {
-		xstream.alias("transaction", Transaction.class);
+		XmlMarshaller.registerModelClass(Transaction.class);
 	}
 	
 	public String toXml() {
-		return xstream.toXML(this);
+		return XmlMarshaller.toXml(this);
 	}
 	
 	public static Transaction fromXml(String xml) {
-		return (Transaction) xstream.fromXML(xml);
+		return (Transaction) XmlMarshaller.fromXml(xml);
 	}
 
+	public Transaction(TransactionType type) {
+		this.type = type;
+	}
 	
 	public String getAmount() {
 		return amount;
@@ -42,13 +83,9 @@ public class Transaction implements Serializable {
 		this.amount = amount;
 	}
 
-	public String getType() {
+	public TransactionType getType() {
 		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
+	}	
 
 	public String getPaymentMethodToken() {
 		return paymentMethodToken;
