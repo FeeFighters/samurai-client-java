@@ -48,7 +48,7 @@ public class Transaction implements Serializable {
 	private String currencyCode; // request		
 	
 	@XStreamAlias("processor_token")
-	private String processor_token; // response
+	private String processorToken; // response
 		
 	@XStreamAlias("processor_response")
 	private ProcessorResponse processorResponse; // response
@@ -159,14 +159,6 @@ public class Transaction implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public String getProcessor_token() {
-		return processor_token;
-	}
-
-	public void setProcessor_token(String processor_token) {
-		this.processor_token = processor_token;
-	}
-
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
@@ -179,5 +171,15 @@ public class Transaction implements Serializable {
 		this.type = type;
 	}
 
+	public ProcessorResponse getProcessorResponse() {
+		return processorResponse;
+	}
 	
+	public String getProcessorToken() {
+		return processorToken;
+	}
+	
+	public void setProcessorToken(String processorToken) {
+		this.processorToken = processorToken;
+	}
 }
