@@ -9,4 +9,12 @@ public class ProcessorResponse {
 	
 	@XStreamAlias("messages")
 	private MessageList messageList = new MessageList();
+	
+	public boolean getSuccess() {
+		return success;
+	}
+	
+	public MessageList getMessageList() {
+		return messageList;
+	}
 }

@@ -40,5 +40,24 @@ public class Message {
 		this.value = value;
 	}
 
-	
+	public String getMessageClass() {
+		return messageClass;
+	}
+
+	public String getMessageSubClass() {
+		return messageSubClass;
+	}
+
+	public String getContext() {
+		return context;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
 }
