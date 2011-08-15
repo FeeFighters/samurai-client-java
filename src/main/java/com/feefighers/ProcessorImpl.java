@@ -25,35 +25,29 @@ public class ProcessorImpl implements Processor {
 	}
 
 	@Override
-	public String purchase(String paymentMethodToken, double amount,
+	public Transaction purchase(String paymentMethodToken, double amount,
 			Options options) {
 		return execute(TransactionType.Purchase, paymentMethodToken, amount, options);
 	}
 
 	@Override
-	public String authorize(String paymentMethodToken, double amount,
+	public Transaction authorize(String paymentMethodToken, double amount,
 			Options options) {
 		return execute(TransactionType.authorize, paymentMethodToken, amount, options);
 	}
 	
-	protected String execute(TransactionType type, String paymentMethodToken, double amount,
+	protected Transaction execute(TransactionType type, String paymentMethodToken, double amount,
 			Options options) {
-		Transaction transaction = new Transaction(TransactionType.Purchase);		
-		transaction.setAmount(String.valueOf(amount));
+		Transaction transaction = TransactionHelper.generateTransaction(options);
 		transaction.setPaymentMethodToken(paymentMethodToken);
+		transaction.setAmount(String.valueOf(amount));
 		
-		if(options != null) {
-			transaction.setDescriptor(options.get("descriptor"));
-			transaction.setCustom(options.get("custom"));
-			transaction.setCustomerReference(options.get("customer_reference"));
-			transaction.setBillingReference(options.get("billing_reference"));
-		}
+		final String url = "processors/" + gateway.getProcessorToken() + "/" +
+				type.name().toLowerCase() + ".xml"; 
+		String xml = http.post(url, transaction.toXml());
 		
-		if(StringUtils.isBlank(transaction.getCurrencyCode())) {
-			transaction.setCurrencyCode("USD");
-		}
-		
-		return http.post("processors/" + gateway.getProcessorToken() + "/purchase.xml", transaction.toXml());		
+		Transaction ret = Transaction.fromXml(xml);
+		return ret;
 	}
 
 }
