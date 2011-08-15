@@ -40,14 +40,18 @@ public class Http {
     }
 
     public String get(String url) {
-        return httpRequest(RequestMethod.GET, url, null);
+        return httpRequest(RequestMethod.GET, url, null, null);
     }
     
     public String post(String url, String body) {
-    	return httpRequest(RequestMethod.POST, url, body);
+    	return httpRequest(RequestMethod.POST, url, body, "application/xml");
+    }
+    
+    public String post(String url, String body, String contentType) {
+    	return httpRequest(RequestMethod.POST, url, body, contentType);
     }
 
-	private String httpRequest(RequestMethod requestMethod, String url, String body) {
+	private String httpRequest(RequestMethod requestMethod, String url, String body, String contentType) {
 		HttpEntity entity = null;
 		HttpClient client = null;
 		InputStream responseInputStream = null;
@@ -70,13 +74,17 @@ public class Http {
 					postRequest.setEntity(new StringEntity(body));
 				}
 				request = postRequest;
-				request.addHeader("Content-Type", "application/x-www-form-urlencoded");
+				if(contentType != null) {
+					request.addHeader("Content-Type", contentType);
+				}
 			}
 			
 			if(StringUtils.isNotBlank(username)) {
 				Credentials creds = new UsernamePasswordCredentials(username, password);
 				request.addHeader(new BasicScheme().authenticate(creds, request));
 			}
+			request.setHeader("Connection", "close");
+			request.setHeader("Accept", "*/*");
 			
 			HttpResponse response = client.execute(request);
 			checkHttpStatus(response);
