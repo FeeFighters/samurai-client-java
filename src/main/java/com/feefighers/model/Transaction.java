@@ -135,5 +135,49 @@ public class Transaction implements Serializable {
 		this.billingReference = billingReference;
 	}
 
+	public String getReferenceId() {
+		return referenceId;
+	}
+
+	public void setReferenceId(String referenceId) {
+		this.referenceId = referenceId;
+	}
+
+	public String getTransactionToken() {
+		return transactionToken;
+	}
+
+	public void setTransactionToken(String transactionToken) {
+		this.transactionToken = transactionToken;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getProcessor_token() {
+		return processor_token;
+	}
+
+	public void setProcessor_token(String processor_token) {
+		this.processor_token = processor_token;
+	}
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public void setType(TransactionType type) {
+		this.type = type;
+	}
+
 	
 }

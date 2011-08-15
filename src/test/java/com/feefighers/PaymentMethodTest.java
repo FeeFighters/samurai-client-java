@@ -27,7 +27,8 @@ public class PaymentMethodTest {
 				"merchant_key=" + config.getProperty("merchantKey") + "&" +
 				"credit_card[first_name]=Scooby&custom=&credit_card[last_name]=Do&credit_card[city]=Mystery Van&" +
 				"credit_card[state]=IL&credit_card[zip]=60607&credit_card[card_number]=4111111111111111&credit_card[cvv]=123&" +
-				"credit_card[expiry_month]=04&credit_card[expiry_year]=2014&sandbox=true");
+				"credit_card[expiry_month]=04&credit_card[expiry_year]=2014&sandbox=true",
+				"application/x-www-form-urlencoded");
 		final Matcher matcher = Pattern.compile("payment_method_token=(.+)\\\"").matcher(output);
 		matcher.find();
 		final String paymentMethodToken = matcher.group(1);
