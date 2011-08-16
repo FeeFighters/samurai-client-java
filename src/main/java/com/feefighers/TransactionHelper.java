@@ -4,12 +4,12 @@ import org.apache.commons.lang.StringUtils;
 
 import com.feefighers.model.Options;
 import com.feefighers.model.Transaction;
-import com.feefighers.model.Transaction.TransactionType;
+import com.feefighers.model.Transaction.TransactionRequestType;
 
 public class TransactionHelper {
 
 	public static Transaction generateTransaction(Options options) {
-		Transaction transaction = new Transaction(TransactionType.Purchase);
+		Transaction transaction = new Transaction(TransactionRequestType.purchase);
 		
 		if(options != null) {
 			if(options.get("amount") != null) {

@@ -13,8 +13,12 @@ public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public enum TransactionType {
-		Purchase, authorize
+	public enum TransactionRequestType {
+		purchase, authorize
+	}
+	
+	public enum TransactionResponseType {
+		Purchase, Authorize
 	}
 	
 	@XStreamAlias("reference_id") 
@@ -38,8 +42,11 @@ public class Transaction implements Serializable {
 	@XStreamAlias("customer_reference")
 	private String customerReference; // request
 
+	@XStreamAlias("type")
+	private TransactionRequestType requestType; // request
+	
 	@XStreamAlias("transaction_type")
-	private TransactionType type; // request
+	private TransactionResponseType responseType; // response	
 		
 	@XStreamAlias("amount")
 	private String amount; // request
@@ -71,8 +78,8 @@ public class Transaction implements Serializable {
 		return (Transaction) XmlMarshaller.fromXml(xml);
 	}
 
-	public Transaction(TransactionType type) {
-		this.type = type;
+	public Transaction(TransactionRequestType type) {
+		this.requestType = type;
 	}
 	
 	public String getAmount() {
@@ -83,8 +90,8 @@ public class Transaction implements Serializable {
 		this.amount = amount;
 	}
 
-	public TransactionType getType() {
-		return type;
+	public TransactionRequestType getRequestType() {
+		return requestType;
 	}	
 
 	public String getPaymentMethodToken() {
@@ -167,8 +174,8 @@ public class Transaction implements Serializable {
 		this.paymentMethod = paymentMethod;
 	}
 
-	public void setType(TransactionType type) {
-		this.type = type;
+	public void setRequestType(TransactionRequestType type) {
+		this.requestType = type;
 	}
 
 	public ProcessorResponse getProcessorResponse() {
@@ -181,5 +188,13 @@ public class Transaction implements Serializable {
 	
 	public void setProcessorToken(String processorToken) {
 		this.processorToken = processorToken;
+	}
+	
+	public TransactionResponseType getResponseType() {
+		return responseType;
+	}
+	
+	public void setResponseType(TransactionResponseType responseType) {
+		this.responseType = responseType;
 	}
 }

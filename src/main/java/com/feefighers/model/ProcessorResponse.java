@@ -10,11 +10,18 @@ public class ProcessorResponse {
 	@XStreamAlias("messages")
 	private MessageList messageList = new MessageList();
 	
+	@XStreamAlias("avs_result_code")
+	private String avsResultCode;
+	
 	public boolean getSuccess() {
 		return success;
 	}
 	
 	public MessageList getMessageList() {
 		return messageList;
+	}
+	
+	public String getAvsResultCode() {
+		return avsResultCode;
 	}
 }

@@ -3,7 +3,7 @@ package com.feefighers;
 import com.feefighers.http.Http;
 import com.feefighers.model.Options;
 import com.feefighers.model.Transaction;
-import com.feefighers.model.Transaction.TransactionType;
+import com.feefighers.model.Transaction.TransactionRequestType;
 
 public class PaymentTransactionImpl implements PaymentTransaction {
 

@@ -4,7 +4,7 @@ import com.feefighers.http.Http;
 import com.feefighers.model.Options;
 import com.feefighers.model.PaymentMethod;
 import com.feefighers.model.Transaction;
-import com.feefighers.model.Transaction.TransactionType;
+import com.feefighers.model.Transaction.TransactionRequestType;
 
 public class ProcessorImpl implements Processor {
 
@@ -31,16 +31,16 @@ public class ProcessorImpl implements Processor {
 	@Override
 	public Transaction purchase(String paymentMethodToken, double amount,
 			Options options) {
-		return execute(TransactionType.Purchase, paymentMethodToken, amount, options);
+		return execute(TransactionRequestType.purchase, paymentMethodToken, amount, options);
 	}
 
 	@Override
 	public Transaction authorize(String paymentMethodToken, double amount,
 			Options options) {
-		return execute(TransactionType.authorize, paymentMethodToken, amount, options);
+		return execute(TransactionRequestType.authorize, paymentMethodToken, amount, options);
 	}
 	
-	protected Transaction execute(TransactionType type, String paymentMethodToken, double amount,
+	protected Transaction execute(TransactionRequestType type, String paymentMethodToken, double amount,
 			Options options) {
 		Transaction transaction = TransactionHelper.generateTransaction(options);
 		transaction.setPaymentMethodToken(paymentMethodToken);
