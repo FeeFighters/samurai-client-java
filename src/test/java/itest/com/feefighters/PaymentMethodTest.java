@@ -1,4 +1,4 @@
-package com.feefighers;
+package itest.com.feefighters;
 
 import java.io.File;
 import java.util.Properties;
@@ -12,6 +12,7 @@ import org.apache.commons.lang.text.StrMatcher;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.feefighers.SamuraiGateway;
 import com.feefighers.http.Http;
 import com.feefighers.model.PaymentMethod;
 

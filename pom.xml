@@ -48,10 +48,18 @@
     <dependency>
       <groupId>org.apache.httpcomponents</groupId> 
       <artifactId>httpclient</artifactId> 
-      <!--<version>4.0.1</version>-->
       <version>4.1.2</version>                      
     </dependency>    
-  
+    <dependency>
+      <groupId>commons-lang</groupId> 
+      <artifactId>commons-lang</artifactId> 
+      <version>2.6</version>
+    </dependency>   
+    <dependency>
+      <groupId>commons-io</groupId> 
+      <artifactId>commons-io</artifactId> 
+      <version>1.3.2</version> 
+    </dependency>            
     
     <!-- tests -->
     <dependency>
@@ -60,17 +68,11 @@
       <version>6.1.1</version>
       <scope>test</scope> 
     </dependency>      
-    <dependency>
-      <groupId>commons-io</groupId> 
-      <artifactId>commons-io</artifactId> 
-      <version>1.3.2</version>
-      <scope>test</scope> 
-    </dependency>
+
     <dependency>
       <groupId>commons-lang</groupId> 
       <artifactId>commons-lang</artifactId> 
       <version>2.6</version>
-      <scope>test</scope> 
     </dependency>         
       
   </dependencies>
@@ -88,7 +90,45 @@
           <target>1.6</target>
         </configuration>
       </plugin>
-
+      
+      <plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-surefire-plugin</artifactId>
+		  <configuration>
+		    <excludes>
+		      <exclude>**/itest/**</exclude>
+		    </excludes>
+		  </configuration>		
+      </plugin>
     </plugins>
   </build>
+  
+  <profiles>
+    <profile>
+      <id>itest</id>
+      <build>
+        <plugins>
+          <plugin>
+		  	<groupId>org.apache.maven.plugins</groupId>
+		  	<artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>surefire-itest</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <excludes>
+                    <exclude>none</exclude>
+                  </excludes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>  
 </project>
