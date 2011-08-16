@@ -14,7 +14,7 @@ public class PaymentMethodXmlTest {
 	public void shouldSerializePaymentMethod() throws Exception {
 		// given
 		final Message message = new Message("input.cvv", "too_long", "");
-		message.messageClass = "error";
+		message.setMessageClass("error");
 		
 		final SimpleDateFormat sdf =  new SimpleDateFormat(XmlMarshaller.DEFAULT_DATE_FORMAT);
 		

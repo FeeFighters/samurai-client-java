@@ -8,26 +8,15 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 @XStreamConverter(MessageConverter.class)
 public class Message {
 	
-//	@XStreamAlias("class")
-//	@XStreamAsAttribute
-	@XStreamOmitField
-	String messageClass;
+	private String messageClass;
 
-//	@XStreamAlias("class")
-//	@XStreamAsAttribute
-	@XStreamOmitField
-	String messageSubClass;
+	private String messageSubClass;
+
+	private String context;
+
+	private String key;
 	
-	
-//	@XStreamAsAttribute
-	@XStreamOmitField
-	String context;
-	
-	@XStreamOmitField
-//	@XStreamAsAttribute
-	String key;
-	
-	String value;
+	private String value;
 	
 	static {
 		XmlMarshaller.registerModelClass(Message.class);
@@ -60,4 +49,11 @@ public class Message {
 		return value;
 	}
 
+	public void setMessageClass(String messageClass) {
+		this.messageClass = messageClass;
+	}
+	
+	public void setMessageSubClass(String messageSubClass) {
+		this.messageSubClass = messageSubClass;
+	}
 }
