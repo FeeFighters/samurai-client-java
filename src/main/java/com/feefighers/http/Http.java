@@ -6,6 +6,7 @@ import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.auth.AuthenticationException;
@@ -14,6 +15,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
@@ -24,8 +26,10 @@ import org.apache.http.params.HttpProtocolParams;
 
 public class Http {
 
-    enum RequestMethod {
-        GET, POST
+    private static final String DEFAULT_CONTENT_TYPE = "application/xml";
+
+	enum RequestMethod {
+        GET, POST, PUT
     }    
 
     private String username;
@@ -43,8 +47,12 @@ public class Http {
         return httpRequest(RequestMethod.GET, url, null, null);
     }
     
+    public String put(String url, String body) {
+    	return httpRequest(RequestMethod.PUT, url, body, DEFAULT_CONTENT_TYPE);
+    }
+    
     public String post(String url, String body) {
-    	return httpRequest(RequestMethod.POST, url, body, "application/xml");
+    	return httpRequest(RequestMethod.POST, url, body, DEFAULT_CONTENT_TYPE);
     }
     
     public String post(String url, String body, String contentType) {
@@ -66,16 +74,26 @@ public class Http {
 
 			String uri = baseUrl + (url.startsWith("/") ? url : "/" + url);
 			HttpUriRequest request = null;
+			HttpEntityEnclosingRequest entityRequest = null;
+			
 			if(RequestMethod.GET.equals(requestMethod)) {
 				request = new HttpGet(uri);
 			} else if(RequestMethod.POST.equals(requestMethod)) {
 				HttpPost postRequest = new HttpPost(uri);
-				if(StringUtils.isNotBlank(body)) {
-					postRequest.setEntity(new StringEntity(body));
-				}
 				request = postRequest;
+				entityRequest = postRequest;
+			} else if(RequestMethod.PUT.equals(requestMethod)) {
+				HttpPut putRequest = new HttpPut(uri);
+				request = putRequest;
+				entityRequest = putRequest;
+			}
+			
+			if(entityRequest != null) {
+				if(StringUtils.isNotBlank(body)) {
+					entityRequest.setEntity(new StringEntity(body));
+				}
 				if(contentType != null) {
-					request.addHeader("Content-Type", contentType);
+					entityRequest.addHeader("Content-Type", contentType);
 				}
 			}
 			

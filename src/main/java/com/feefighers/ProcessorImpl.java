@@ -1,7 +1,5 @@
 package com.feefighers;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.feefighers.http.Http;
 import com.feefighers.model.Options;
 import com.feefighers.model.PaymentMethod;
@@ -23,6 +21,12 @@ public class ProcessorImpl implements Processor {
 		String xml = http.get("/payment_methods/" + paymentMethodToken + ".xml");
 		return PaymentMethod.fromXml(xml);
 	}
+	
+	@Override
+	public boolean save(PaymentMethod paymentMethod) {
+		http.put("/payment_methods/" + paymentMethod.getPaymentMethodToken() + ".xml", paymentMethod.toXml());
+		return true;
+	}	
 
 	@Override
 	public Transaction purchase(String paymentMethodToken, double amount,

@@ -7,6 +7,8 @@ import com.feefighers.model.Transaction;
 public interface Processor {
 	
 	PaymentMethod find(String paymentMethodToken);
+	
+	boolean save(PaymentMethod paymentMethod);
 			
 	Transaction purchase(String paymentMethodToken, double amount, Options options);
 	
