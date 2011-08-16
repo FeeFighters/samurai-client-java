@@ -46,8 +46,8 @@ public class XmlMarshaller {
 			return converter.fromString(reader.getValue());
 		}
 	}
-	
-	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z";
+		
+	protected static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z";
 	private static final String[] DATE_FORMATS = { };
 	static {		
 		

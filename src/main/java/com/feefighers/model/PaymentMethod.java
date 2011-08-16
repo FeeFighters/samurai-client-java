@@ -3,6 +3,8 @@ package com.feefighers.model;
 import java.util.Date;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.converters.basic.NullConverter;
 
 @XStreamAlias("payment_method")
 public class PaymentMethod  {
