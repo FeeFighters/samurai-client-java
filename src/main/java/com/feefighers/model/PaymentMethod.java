@@ -2,9 +2,9 @@ package com.feefighers.model;
 
 import java.util.Date;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.converters.basic.NullConverter;
 
 @XStreamAlias("payment_method")
 public class PaymentMethod  {
@@ -236,5 +236,24 @@ public class PaymentMethod  {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	@Override
+	public String toString() {		
+		return new ToStringBuilder(this)
+			.append("address1", this.address1)
+			.append("address2", this.address2)
+			.append("country", this.cardType)
+			.append("city", this.city)
+			.append("country", this.country)
+			.append("custom", this.custom)
+			.append("lastName", this.firstName)
+			.append("lastName", this.lastFourDigits)
+			.append("lastName", this.lastName)
+			.append("paymentMethodToken", this.paymentMethodToken)
+			.append("state", this.state)
+			.append("zip", this.zip)
+			.toString();
+	}
+	
 	
 }

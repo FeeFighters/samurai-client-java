@@ -3,10 +3,9 @@ package com.feefighers.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.XStreamer;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 @XStreamAlias("transaction")
 public class Transaction implements Serializable {
@@ -196,5 +195,21 @@ public class Transaction implements Serializable {
 	
 	public void setResponseType(TransactionResponseType responseType) {
 		this.responseType = responseType;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+			.append("amount", this.amount)
+			.append("billingReference", this.billingReference)
+			.append("currencyCode", this.currencyCode)
+			.append("custom", this.custom)
+			.append("customerReference", this.customerReference)
+			.append("descriptor", this.descriptor)
+			.append("paymentMethodToken", this.paymentMethodToken)
+			.append("processorToken", this.processorToken)
+			.append("referenceId", this.referenceId)
+			.append("transactionToken", this.transactionToken)
+			.toString();
 	}
 }

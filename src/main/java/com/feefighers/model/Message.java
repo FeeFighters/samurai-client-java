@@ -1,8 +1,9 @@
 package com.feefighers.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("message")
 @XStreamConverter(MessageConverter.class)
@@ -55,5 +56,16 @@ public class Message {
 	
 	public void setMessageSubClass(String messageSubClass) {
 		this.messageSubClass = messageSubClass;
+	}
+	
+	@Override
+	public String toString() {		
+		return new ToStringBuilder(this)
+			.append("messageClass", this.messageClass)
+			.append("messageSubClass", this.messageSubClass)
+			.append("context", this.context)
+			.append("key", this.key)
+			.append("value", this.value)
+			.toString();
 	}
 }

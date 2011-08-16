@@ -1,5 +1,7 @@
 package com.feefighers.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("processor_response")
@@ -13,7 +15,7 @@ public class ProcessorResponse {
 	@XStreamAlias("avs_result_code")
 	private String avsResultCode;
 	
-	public boolean getSuccess() {
+	public Boolean getSuccess() {
 		return success;
 	}
 	
@@ -23,5 +25,14 @@ public class ProcessorResponse {
 	
 	public String getAvsResultCode() {
 		return avsResultCode;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+			.append("success", this.success)
+			.append("messageList", this.messageList)
+			.append("avsResultCode", this.avsResultCode)
+			.toString();
 	}
 }
