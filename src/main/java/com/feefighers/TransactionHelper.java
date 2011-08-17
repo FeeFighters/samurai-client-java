@@ -21,6 +21,7 @@ public class TransactionHelper {
 			transaction.setCustom(options.get("custom"));
 			transaction.setCustomerReference(options.get("customer_reference"));
 			transaction.setBillingReference(options.get("billing_reference"));
+			transaction.setCurrencyCode(options.get("currency_code"));
 		}
 		
 		if(defaultCurrency && StringUtils.isBlank(transaction.getCurrencyCode())) {
