@@ -81,6 +81,10 @@ public class PaymentMethod  {
 		return (PaymentMethod) XmlMarshaller.fromXml(xml);
 	}
 
+	public String getId() {
+		return getPaymentMethodToken();
+	}
+	
 	public String getPaymentMethodToken() {
 		return paymentMethodToken;
 	}

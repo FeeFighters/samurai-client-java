@@ -8,7 +8,11 @@ public interface Processor {
 	
 	PaymentMethod find(String paymentMethodToken);
 	
-	boolean save(PaymentMethod paymentMethod);
+	PaymentMethod save(PaymentMethod paymentMethod);
+	
+	PaymentMethod retain(PaymentMethod paymentMethod);
+	
+	PaymentMethod redact(PaymentMethod paymentMethod);
 			
 	Transaction purchase(String paymentMethodToken, double amount, Options options);
 	

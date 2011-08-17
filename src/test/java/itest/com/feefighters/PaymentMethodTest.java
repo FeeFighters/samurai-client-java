@@ -1,16 +1,17 @@
 package itest.com.feefighters;
 
+import static itest.com.feefighters.PaymentMethodHelper.createPaymentMethod;
+import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequest;
+import itest.com.feefighters.PaymentMethodHelper.PaymentMethodRequest;
+
 import java.io.IOException;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.feefighers.SamuraiGateway;
-import com.feefighers.http.Http;
 import com.feefighers.model.PaymentMethod;
 
 public class PaymentMethodTest {
@@ -18,27 +19,15 @@ public class PaymentMethodTest {
 	private Properties config;
 	private String paymentMethodToken;
 	private SamuraiGateway gateway;
-	private PaymentMethod createdPaymentMethod;
+	private PaymentMethodRequest paymentMethodRequest;
 	
 	@BeforeTest
 	public void createNewPaymentMethod() throws IOException {
 		config = new Properties();
 		config.load(getClass().getResourceAsStream("/config.properties"));
 		
-		createdPaymentMethod = new PaymentMethod();
-		createdPaymentMethod.setFirstName("Scooby");
-		
-		final Http http = new Http(null, null, "https://samurai.feefighters.com/v1");		
-		final String output = http.post("payment_methods","redirect_url=http://localhost&" +
-				"merchant_key=" + config.getProperty("merchantKey") + "&" +
-				"credit_card[first_name]=" + createdPaymentMethod.getFirstName() + 
-				"&custom=&credit_card[last_name]=Do&credit_card[city]=Mystery Van&" +
-				"credit_card[state]=IL&credit_card[zip]=60607&credit_card[card_number]=4111111111111111&credit_card[cvv]=123&" +
-				"credit_card[expiry_month]=04&credit_card[expiry_year]=2014&sandbox=true",
-				"application/x-www-form-urlencoded");
-		final Matcher matcher = Pattern.compile("payment_method_token=(.+)\\\"").matcher(output);
-		matcher.find();
-		paymentMethodToken = matcher.group(1);
+		paymentMethodRequest = newPaymentMethodRequest();
+		paymentMethodToken = createPaymentMethod(paymentMethodRequest);
 		
 		gateway = new SamuraiGateway(config.getProperty("merchantKey"), 
 				config.getProperty("merchantPassword"), config.getProperty("processorToken"));		
@@ -49,7 +38,7 @@ public class PaymentMethodTest {
 		final PaymentMethod paymentMethod = gateway.processor().find(paymentMethodToken);
 		
 		Assert.assertNotNull(paymentMethod);
-		Assert.assertEquals(paymentMethod.getFirstName(), createdPaymentMethod.getFirstName());
+		Assert.assertEquals(paymentMethod.getFirstName(), paymentMethodRequest.firstName);
 	}
 	
 	@Test
@@ -57,12 +46,35 @@ public class PaymentMethodTest {
 		final PaymentMethod paymentMethod = gateway.processor().find(paymentMethodToken);
 		paymentMethod.setFirstName(paymentMethod.getFirstName() + paymentMethod.getFirstName());
 		
-		boolean success = gateway.processor().save(paymentMethod);
-		Assert.assertTrue(success);
+		final PaymentMethod returnedPaymentMethod = gateway.processor().save(paymentMethod);
+		Assert.assertNotNull(returnedPaymentMethod);
 		
 		final PaymentMethod modifiedPaymentMethod = gateway.processor().find(paymentMethodToken);
 		Assert.assertNotNull(modifiedPaymentMethod);
 		Assert.assertEquals(modifiedPaymentMethod.getFirstName(), paymentMethod.getFirstName());
 	}
 	
+	@Test
+	public void shouldRedactPaymentMethod() throws Exception {
+		final PaymentMethod paymentMethod = gateway.processor().find(paymentMethodToken);		
+		Assert.assertNotNull(paymentMethod.getRedacted());
+		Assert.assertFalse(paymentMethod.getRedacted());
+		
+		final PaymentMethod returnedPaymentMethod = gateway.processor().redact(paymentMethod);		
+		Assert.assertNotNull(returnedPaymentMethod);
+		Assert.assertNotNull(returnedPaymentMethod.getRedacted());
+		Assert.assertTrue(returnedPaymentMethod.getRedacted());
+	}
+	
+	@Test
+	public void shouldRetainPaymentMethod() throws Exception {
+		final PaymentMethod paymentMethod = gateway.processor().find(paymentMethodToken);		
+		Assert.assertNotNull(paymentMethod.getRetained());
+		Assert.assertFalse(paymentMethod.getRetained());
+		
+		final PaymentMethod returnedPaymentMethod = gateway.processor().retain(paymentMethod);		
+		Assert.assertNotNull(returnedPaymentMethod);
+		Assert.assertNotNull(returnedPaymentMethod.getRetained());
+		Assert.assertTrue(returnedPaymentMethod.getRetained());
+	}
 }
