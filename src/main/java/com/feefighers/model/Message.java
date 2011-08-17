@@ -68,4 +68,57 @@ public class Message {
 			.append("value", this.value)
 			.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((context == null) ? 0 : context.hashCode());
+		result = prime * result + ((key == null) ? 0 : key.hashCode());
+		result = prime * result
+				+ ((messageClass == null) ? 0 : messageClass.hashCode());
+		result = prime * result
+				+ ((messageSubClass == null) ? 0 : messageSubClass.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Message other = (Message) obj;
+		if (context == null) {
+			if (other.context != null)
+				return false;
+		} else if (!context.equals(other.context))
+			return false;
+		if (key == null) {
+			if (other.key != null)
+				return false;
+		} else if (!key.equals(other.key))
+			return false;
+		if (messageClass == null) {
+			if (other.messageClass != null)
+				return false;
+		} else if (!messageClass.equals(other.messageClass))
+			return false;
+		if (messageSubClass == null) {
+			if (other.messageSubClass != null)
+				return false;
+		} else if (!messageSubClass.equals(other.messageSubClass))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
+	}
+	
+	
 }
