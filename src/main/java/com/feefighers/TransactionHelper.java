@@ -8,7 +8,7 @@ import com.feefighers.model.Transaction.TransactionRequestType;
 
 public class TransactionHelper {
 
-	public static Transaction generateTransaction(Options options) {
+	public static Transaction generateTransactionAndSetOptions(Options options, boolean defaultCurrency) {
 		Transaction transaction = new Transaction(TransactionRequestType.purchase);
 		
 		if(options != null) {
@@ -23,7 +23,7 @@ public class TransactionHelper {
 			transaction.setBillingReference(options.get("billing_reference"));
 		}
 		
-		if(StringUtils.isBlank(transaction.getCurrencyCode())) {
+		if(defaultCurrency && StringUtils.isBlank(transaction.getCurrencyCode())) {
 			transaction.setCurrencyCode("USD");
 		}		
 		

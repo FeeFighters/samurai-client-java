@@ -31,7 +31,7 @@ public class PurchaseTest {
 		
 		Transaction transaction = gateway.processor().purchase(paymentMethodToken, 10, null);
 		Assert.assertNotNull(transaction);
-		Assert.assertEquals(transaction.getResponseType(), Transaction.TransactionResponseType.Purchase);
+		Assert.assertEquals(transaction.getTransactionType(), Transaction.TransactionType.Purchase);
 		Assert.assertNotNull(transaction.getProcessorResponse());
 		Assert.assertNotNull(transaction.getProcessorResponse().getSuccess());
 		Assert.assertTrue(transaction.getProcessorResponse().getSuccess());
@@ -43,7 +43,7 @@ public class PurchaseTest {
 		
 		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 10, null);
 		Assert.assertNotNull(transaction);
-		Assert.assertEquals(transaction.getResponseType(), Transaction.TransactionResponseType.Authorize);
+		Assert.assertEquals(transaction.getTransactionType(), Transaction.TransactionType.Authorize);
 		Assert.assertNotNull(transaction.getProcessorResponse());
 		Assert.assertNotNull(transaction.getProcessorResponse().getSuccess());
 		Assert.assertTrue(transaction.getProcessorResponse().getSuccess());		

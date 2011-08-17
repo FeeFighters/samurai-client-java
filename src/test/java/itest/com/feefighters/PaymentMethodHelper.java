@@ -32,7 +32,7 @@ public class PaymentMethodHelper {
 	protected static String createPaymentMethod(PaymentMethodRequest req) throws IOException {
 		final Properties config = new Properties();
 		config.load(PaymentMethodHelper.class.getResourceAsStream("/config.properties"));		
-		
+				
 		final Http http = new Http(null, null, "https://samurai.feefighters.com/v1");
 		final String body = "redirect_url=http://localhost" 
 				+ "&merchant_key=" + config.getProperty("merchantKey") 
@@ -52,4 +52,5 @@ public class PaymentMethodHelper {
 		String paymentMethodToken = matcher.group(1);
 		return paymentMethodToken;
 	}
+	
 }

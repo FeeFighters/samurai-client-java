@@ -26,8 +26,7 @@ public class ProcessorImpl implements Processor {
 	
 	@Override
 	public PaymentMethod load(Map<String, String> values) {
-		
-		return null;
+		return PaymentMethod.fromValueMap(values);
 	}		
 	
 	@Override
@@ -60,7 +59,7 @@ public class ProcessorImpl implements Processor {
 	
 	protected Transaction executeTransaction(TransactionRequestType type, String paymentMethodToken, double amount,
 			Options options) {
-		Transaction transaction = TransactionHelper.generateTransaction(options);
+		Transaction transaction = TransactionHelper.generateTransactionAndSetOptions(options, true);
 		transaction.setPaymentMethodToken(paymentMethodToken);
 		transaction.setAmount(String.valueOf(amount));
 		

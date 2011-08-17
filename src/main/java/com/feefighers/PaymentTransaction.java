@@ -5,10 +5,12 @@ import com.feefighers.model.Transaction;
 
 public interface PaymentTransaction {
 
-	Transaction capture(String transactionToken, double amount, Options options);
+	Transaction find(String transactionReferenceId);
 	
-	Transaction voidOperation(String transactionToken, Options options);
+	Transaction capture(Transaction transaction, Double amount, Options options);
 	
-	Transaction credit(String transactionToken, double amount, Options options);
+	Transaction voidOperation(Transaction transaction, Options options);
+	
+	Transaction credit(Transaction transaction, Double amount, Options options);
 	
 }

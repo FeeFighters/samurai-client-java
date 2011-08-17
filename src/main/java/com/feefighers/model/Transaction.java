@@ -16,8 +16,8 @@ public class Transaction implements Serializable {
 		purchase, authorize
 	}
 	
-	public enum TransactionResponseType {
-		Purchase, Authorize
+	public enum TransactionType {
+		Purchase, Authorize, Void, Capture, Credit
 	}
 	
 	@XStreamAlias("reference_id") 
@@ -45,7 +45,7 @@ public class Transaction implements Serializable {
 	private TransactionRequestType requestType; // request
 	
 	@XStreamAlias("transaction_type")
-	private TransactionResponseType responseType; // response	
+	private TransactionType responseType; // response	
 		
 	@XStreamAlias("amount")
 	private String amount; // request
@@ -81,6 +81,10 @@ public class Transaction implements Serializable {
 		this.requestType = type;
 	}
 	
+	public String getId() {
+		return getTransactionToken();
+	}
+	
 	public String getAmount() {
 		return amount;
 	}
@@ -89,9 +93,9 @@ public class Transaction implements Serializable {
 		this.amount = amount;
 	}
 
-	public TransactionRequestType getRequestType() {
-		return requestType;
-	}	
+//	public TransactionRequestType getRequestType() {
+//		return requestType;
+//	}	
 
 	public String getPaymentMethodToken() {
 		return paymentMethodToken;
@@ -189,11 +193,11 @@ public class Transaction implements Serializable {
 		this.processorToken = processorToken;
 	}
 	
-	public TransactionResponseType getResponseType() {
+	public TransactionType getTransactionType() {
 		return responseType;
 	}
 	
-	public void setResponseType(TransactionResponseType responseType) {
+	public void setResponseType(TransactionType responseType) {
 		this.responseType = responseType;
 	}
 	

@@ -12,6 +12,9 @@ public class ProcessorResponse {
 	@XStreamAlias("messages")
 	private MessageList messageList = new MessageList();
 	
+	@XStreamAlias("processor_data")
+	private String processorData;
+	
 	@XStreamAlias("avs_result_code")
 	private String avsResultCode;
 	
@@ -21,6 +24,10 @@ public class ProcessorResponse {
 	
 	public MessageList getMessageList() {
 		return messageList;
+	}
+	
+	public String getProcessorData() {
+		return processorData;
 	}
 	
 	public String getAvsResultCode() {
@@ -35,6 +42,8 @@ public class ProcessorResponse {
 				+ ((avsResultCode == null) ? 0 : avsResultCode.hashCode());
 		result = prime * result
 				+ ((messageList == null) ? 0 : messageList.hashCode());
+		result = prime * result
+				+ ((processorData == null) ? 0 : processorData.hashCode());
 		result = prime * result + ((success == null) ? 0 : success.hashCode());
 		return result;
 	}
@@ -58,6 +67,11 @@ public class ProcessorResponse {
 				return false;
 		} else if (!messageList.equals(other.messageList))
 			return false;
+		if (processorData == null) {
+			if (other.processorData != null)
+				return false;
+		} else if (!processorData.equals(other.processorData))
+			return false;
 		if (success == null) {
 			if (other.success != null)
 				return false;
@@ -71,7 +85,9 @@ public class ProcessorResponse {
 		return new ToStringBuilder(this)
 			.append("success", this.success)
 			.append("messageList", this.messageList)
+			.append("processorData", this.processorData)
 			.append("avsResultCode", this.avsResultCode)
 			.toString();
 	}
+	
 }

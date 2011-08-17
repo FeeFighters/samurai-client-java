@@ -36,4 +36,8 @@ public class SamuraiGateway implements Serializable {
 		return new ProcessorImpl(this, new Http(merchantKey, merchantPassword, "https://samurai.feefighters.com/v1"));
 	}
 	
+	public PaymentTransaction transaction() {
+		return new PaymentTransactionImpl(this, new Http(merchantKey, merchantPassword, "https://samurai.feefighters.com/v1"));
+	}	
+	
 }
