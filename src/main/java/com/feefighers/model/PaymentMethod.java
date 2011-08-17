@@ -1,8 +1,10 @@
 package com.feefighers.model;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.math.NumberUtils;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -79,6 +81,34 @@ public class PaymentMethod  {
 	
 	public static PaymentMethod fromXml(String xml) {
 		return (PaymentMethod) XmlMarshaller.fromXml(xml);
+	}
+	
+	public static PaymentMethod fromValueMap(Map<String, String> map) {
+		PaymentMethod ret = new PaymentMethod();
+		ret.setAddress1(getValue(map, "address1", "address_1"));
+		ret.setAddress2(getValue(map, "address2", "address_2"));
+		ret.setCardType(getValue(map, "cardType", "card_type"));
+		ret.setCity(getValue(map, "city"));
+		ret.setExpiryMonth(getIntegerValue(map, "expiryMonth", "expiry_month"));
+		ret.setExpiryYear(getIntegerValue(map, "expiryYear", "expiryYear"));
+		ret.setFirstName(getValue(map, "firstName", "firstName"));
+		ret.setLastName(getValue(map, "lastName", "last_name"));
+		ret.setPaymentMethodToken(getValue(map, "paymentMethodToken", "payment_method_token"));
+		ret.setState(getValue(map, "state"));
+		ret.setZip(getValue(map, "zip"));
+		return ret;
+	}
+	
+	protected static Integer getIntegerValue(Map<String, String> map, String key1, String key2) {
+		return NumberUtils.createInteger(getValue(map, key1, key2));
+	}
+	
+	protected static String getValue(Map<String, String> map, String key1, String key2) {
+		return map.get(key1) != null ? map.get(key1) : map.get(key2);
+	}
+	
+	protected static String getValue(Map<String, String> map, String key) {
+		return map.get(key);
 	}
 
 	public String getId() {
@@ -246,12 +276,12 @@ public class PaymentMethod  {
 		return new ToStringBuilder(this)
 			.append("address1", this.address1)
 			.append("address2", this.address2)
-			.append("country", this.cardType)
+			.append("cardType", this.cardType)
 			.append("city", this.city)
 			.append("country", this.country)
 			.append("custom", this.custom)
-			.append("lastName", this.firstName)
-			.append("lastName", this.lastFourDigits)
+			.append("firstName", this.firstName)
+			.append("lastFourDigits", this.lastFourDigits)
 			.append("lastName", this.lastName)
 			.append("paymentMethodToken", this.paymentMethodToken)
 			.append("state", this.state)
