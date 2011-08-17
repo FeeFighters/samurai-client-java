@@ -8,8 +8,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.feefighers.SamuraiGateway;
-import com.feefighers.http.Http;
 import com.feefighers.model.Transaction;
+
+import static itest.com.feefighters.PaymentMethodHelper.*;
 
 public class PurchaseTest {
 
@@ -26,7 +27,7 @@ public class PurchaseTest {
 	
 	@Test
 	public void shouldPurchaseMethodPaymentWithValidCreditCardAndReceiveTransaction() throws Exception {
-		String paymentMethodToken = SamuraiIntegrationTestsHelper.createPaymentMethodWithValidCreditCard();
+		String paymentMethodToken = createPaymentMethod(newPaymentMethodRequest());
 		
 		Transaction transaction = gateway.processor().purchase(paymentMethodToken, 10, null);
 		Assert.assertNotNull(transaction);
@@ -38,7 +39,7 @@ public class PurchaseTest {
 	
 	@Test
 	public void shouldAuthorizeMethodPaymentWithValidCreditCardAndReceiveTransaction() throws Exception {
-		String paymentMethodToken = SamuraiIntegrationTestsHelper.createPaymentMethodWithValidCreditCard();
+		String paymentMethodToken = createPaymentMethod(newPaymentMethodRequest());
 		
 		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 10, null);
 		Assert.assertNotNull(transaction);
@@ -49,9 +50,8 @@ public class PurchaseTest {
 	}
 	
 	@Test
-	public void shouldNotAuthorizeMethodPaymentWithInValidCreditCard() throws Exception {
-		Http.enableDebug();
-		String paymentMethodToken = SamuraiIntegrationTestsHelper.createPaymentMethodWithInvalidCreditCard();
+	public void shouldNotAuthorizeMethodPaymentWithInvalidCreditCard() throws Exception {
+		String paymentMethodToken = createPaymentMethod(newPaymentMethodRequestWithInvalidCreditCard());
 		
 		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 10, null);
 		Assert.assertFalse(transaction.getProcessorResponse().getSuccess());		
