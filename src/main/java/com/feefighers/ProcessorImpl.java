@@ -1,5 +1,7 @@
 package com.feefighers;
 
+import java.util.Map;
+
 import com.feefighers.http.Http;
 import com.feefighers.model.Options;
 import com.feefighers.model.PaymentMethod;
@@ -21,6 +23,12 @@ public class ProcessorImpl implements Processor {
 		String xml = http.get("/payment_methods/" + paymentMethodToken + ".xml");
 		return PaymentMethod.fromXml(xml);
 	}
+	
+	@Override
+	public PaymentMethod load(Map<String, String> values) {
+		
+		return null;
+	}		
 	
 	@Override
 	public PaymentMethod save(PaymentMethod paymentMethod) {
@@ -72,5 +80,6 @@ public class ProcessorImpl implements Processor {
 		
 		final PaymentMethod ret = PaymentMethod.fromXml(responseXml);
 		return ret;
-	}	
+	}
+
 }
