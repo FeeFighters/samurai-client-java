@@ -44,14 +44,26 @@ public class PaymentMethodTest {
 	@Test
 	public void shouldUpdatePaymentMethod() throws Exception {
 		final PaymentMethod paymentMethod = gateway.processor().find(paymentMethodToken);
-		paymentMethod.setFirstName(paymentMethod.getFirstName() + paymentMethod.getFirstName());
+		paymentMethod.setAddress1("1");
+		paymentMethod.setAddress2("2");
+		paymentMethod.setCardType("3");
+		paymentMethod.setCity("4");
+		paymentMethod.setCountry("5");
+		paymentMethod.setCustom("6");
+		paymentMethod.setFirstName("7");
+		paymentMethod.setLastName("9");
+		paymentMethod.setState("10");
+		paymentMethod.setZip("11");
 		
 		final PaymentMethod returnedPaymentMethod = gateway.processor().save(paymentMethod);
 		Assert.assertNotNull(returnedPaymentMethod);
+		paymentMethod.setUpdatedAt(returnedPaymentMethod.getUpdatedAt());
+		Assert.assertEquals(returnedPaymentMethod, paymentMethod);
 		
 		final PaymentMethod modifiedPaymentMethod = gateway.processor().find(paymentMethodToken);
 		Assert.assertNotNull(modifiedPaymentMethod);
-		Assert.assertEquals(modifiedPaymentMethod.getFirstName(), paymentMethod.getFirstName());
+		paymentMethod.setUpdatedAt(modifiedPaymentMethod.getUpdatedAt());
+		Assert.assertEquals(modifiedPaymentMethod, paymentMethod);
 	}
 	
 	@Test

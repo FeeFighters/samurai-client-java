@@ -1,7 +1,7 @@
 package com.feefighers;
 
 import com.feefighers.http.Http;
-import com.feefighers.model.Options;
+import com.feefighers.model.TransactionOptions;
 import com.feefighers.model.Transaction;
 
 public class PaymentTransactionImpl implements PaymentTransaction {
@@ -19,22 +19,22 @@ public class PaymentTransactionImpl implements PaymentTransaction {
 	}	
 
 	@Override
-	public Transaction capture(Transaction transaction, Double amount, Options options) {
+	public Transaction capture(Transaction transaction, Double amount, TransactionOptions options) {
 		return execute("capture", transaction, amount, options);
 	}
 
 	@Override
-	public Transaction voidOperation(Transaction transaction, Options options) {
+	public Transaction voidOperation(Transaction transaction, TransactionOptions options) {
 		return execute("void", transaction, null, options);
 	}
 
 	@Override
-	public Transaction credit(Transaction transaction, Double amount, Options options) {
+	public Transaction credit(Transaction transaction, Double amount, TransactionOptions options) {
 		return execute("credit", transaction, amount, options);
 	}
 
 	protected Transaction execute(String action, Transaction transaction, Double amount,
-			Options options) {
+			TransactionOptions options) {
 		final Transaction transactionRequest = TransactionHelper.generateTransactionAndSetOptions(options, false);
 		if(amount != null) {
 			transactionRequest.setAmount(String.valueOf(amount));

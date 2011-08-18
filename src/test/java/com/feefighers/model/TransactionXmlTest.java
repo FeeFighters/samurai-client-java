@@ -11,7 +11,7 @@ public class TransactionXmlTest {
 	@Test
 	public void shouldSerializeEmptyTransaction() {
 		// given
-		final Transaction emptyTransaction = new Transaction(null);
+		final Transaction emptyTransaction = new Transaction();
 		
 		// when
 		final String xml = emptyTransaction.toXml();

@@ -3,7 +3,7 @@ package com.feefighers;
 import java.util.Map;
 
 import com.feefighers.http.Http;
-import com.feefighers.model.Options;
+import com.feefighers.model.TransactionOptions;
 import com.feefighers.model.PaymentMethod;
 import com.feefighers.model.Transaction;
 import com.feefighers.model.Transaction.TransactionRequestType;
@@ -47,18 +47,18 @@ public class ProcessorImpl implements Processor {
 	
 	@Override
 	public Transaction purchase(String paymentMethodToken, double amount,
-			Options options) {
+			TransactionOptions options) {
 		return executeTransaction(TransactionRequestType.purchase, paymentMethodToken, amount, options);
 	}
 
 	@Override
 	public Transaction authorize(String paymentMethodToken, double amount,
-			Options options) {
+			TransactionOptions options) {
 		return executeTransaction(TransactionRequestType.authorize, paymentMethodToken, amount, options);
 	}
 	
 	protected Transaction executeTransaction(TransactionRequestType type, String paymentMethodToken, double amount,
-			Options options) {
+			TransactionOptions options) {
 		final Transaction transaction = TransactionHelper.generateTransactionAndSetOptions(options, true);
 		transaction.setPaymentMethodToken(paymentMethodToken);
 		transaction.setAmount(String.valueOf(amount));

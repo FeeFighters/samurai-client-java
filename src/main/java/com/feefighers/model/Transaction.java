@@ -79,10 +79,6 @@ public class Transaction implements Serializable {
 		return (Transaction) XmlMarshaller.fromXml(xml);
 	}
 
-	public Transaction(TransactionRequestType type) {
-		this.requestType = type;
-	}
-	
 	public String getId() {
 		return getTransactionToken();
 	}
@@ -95,9 +91,9 @@ public class Transaction implements Serializable {
 		this.amount = amount;
 	}
 
-//	public TransactionRequestType getRequestType() {
-//		return requestType;
-//	}	
+	public TransactionRequestType getRequestType() {
+		return requestType;
+	}	
 
 	public String getPaymentMethodToken() {
 		return paymentMethodToken;

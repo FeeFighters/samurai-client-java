@@ -27,6 +27,9 @@ public class PaymentMethodHelper {
 		String cvv = "123";
 		String expiryMonth = "01";
 		String expiryYear = "2014";
+		String city = "Mystery Van";
+		String state = "IL";
+		String zip = "60607";
 	}
 	
 	protected static String createPaymentMethod(PaymentMethodRequest req) throws IOException {
@@ -39,9 +42,9 @@ public class PaymentMethodHelper {
 				+ "&credit_card[first_name]=" + req.firstName
 				+ "&custom=" + req.firstName
 				+ "&credit_card[last_name]=" + req.lastName
-//				+ "&credit_card[city]=Mystery Van" +
-//				+ "&credit_card[state]=IL" +
-//				+ "&credit_card[zip]=60607" +
+				+ "&credit_card[city]=" + req.city
+				+ "&credit_card[state]=" + req.state 
+				+ "&credit_card[zip]=" + req.zip 
 				+ "&credit_card[card_number]=" + req.cardNumber
 				+ "&credit_card[cvv]=" + req.cvv
 				+ "&credit_card[expiry_month]=" + req.expiryMonth
