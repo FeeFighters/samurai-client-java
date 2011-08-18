@@ -162,11 +162,11 @@ public class Transaction implements Serializable {
 	}
 
 	public Date getCreatedAt() {
-		return createdAt;
+		return createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+		this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	public PaymentMethod getPaymentMethod() {

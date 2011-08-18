@@ -1,11 +1,16 @@
 package com.feefighers.model;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("processor_response")
-public class ProcessorResponse {
+public class ProcessorResponse implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
 	@XStreamAlias("success")
 	private Boolean success;
 	
@@ -18,6 +23,10 @@ public class ProcessorResponse {
 	@XStreamAlias("avs_result_code")
 	private String avsResultCode;
 	
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
+	
 	public Boolean getSuccess() {
 		return success;
 	}
@@ -26,8 +35,16 @@ public class ProcessorResponse {
 		return messageList;
 	}
 	
+	public void setProcessorData(String processorData) {
+		this.processorData = processorData;
+	}
+	
 	public String getProcessorData() {
 		return processorData;
+	}
+	
+	public void setAvsResultCode(String avsResultCode) {
+		this.avsResultCode = avsResultCode;
 	}
 	
 	public String getAvsResultCode() {

@@ -13,11 +13,13 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 
-public class XmlMarshaller {
+public final class XmlMarshaller {
 
-	private static final XmlMarshaller instance = new XmlMarshaller();
-	
 	private static XStream xstream = new XStream(new DomDriver("UTF-8", new XmlFriendlyNameCoder("_DOLLAR_", "_"))); 
+	
+	private XmlMarshaller() {
+		
+	}
 	
 	public static class SingleValueConverterTypeWrapper implements Converter {
 		private final SingleValueConverter converter;
@@ -56,7 +58,7 @@ public class XmlMarshaller {
 		xstream.registerConverter(new SingleValueConverterTypeWrapper(new IntConverter(), "integer"));
 	}	
 		
-	public static void registerModelClass(Class cl) {
+	public static void registerModelClass(Class<?> cl) {
 		xstream.processAnnotations(cl);
 	}
 	

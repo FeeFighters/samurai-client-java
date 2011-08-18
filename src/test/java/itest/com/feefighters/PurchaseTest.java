@@ -1,5 +1,9 @@
 package itest.com.feefighters;
 
+import static itest.com.feefighters.PaymentMethodHelper.createPaymentMethod;
+import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequest;
+import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequestWithInvalidCreditCard;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,8 +13,6 @@ import org.testng.annotations.Test;
 
 import com.feefighers.SamuraiGateway;
 import com.feefighers.model.Transaction;
-
-import static itest.com.feefighters.PaymentMethodHelper.*;
 
 public class PurchaseTest {
 
@@ -56,6 +58,5 @@ public class PurchaseTest {
 		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 10, null);
 		Assert.assertFalse(transaction.getProcessorResponse().getSuccess());		
 	}	
-	
 	
 }

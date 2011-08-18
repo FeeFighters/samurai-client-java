@@ -4,7 +4,11 @@ public class HttpException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int statusCode;
+	private Integer statusCode;
+	
+	public HttpException(String message) {
+		super(message);
+	}
 	
 	public HttpException(int statusCode, String message) {
 		super(message);
@@ -25,7 +29,11 @@ public class HttpException extends RuntimeException {
 	}
 	
 	@Override
-	public String getMessage() {		
-		return String.valueOf(getStatusCode());
+	public String getMessage() {
+		String superMessage = super.getMessage();
+		if(statusCode != null) {
+			superMessage += "(status code: " + statusCode + ")";
+		}
+		return superMessage;
 	}
 }

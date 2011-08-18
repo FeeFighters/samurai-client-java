@@ -1,5 +1,6 @@
 package com.feefighers.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
-public class MessageList {
+public class MessageList implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@XStreamAlias("type")
 	@XStreamAsAttribute

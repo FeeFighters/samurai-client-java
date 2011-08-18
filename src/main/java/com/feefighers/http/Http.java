@@ -86,6 +86,8 @@ public class Http {
 				HttpPut putRequest = new HttpPut(uri);
 				request = putRequest;
 				entityRequest = putRequest;
+			} else {
+				throw new HttpException("Unknown request method " + requestMethod.name());
 			}
 			
 			if(entityRequest != null) {

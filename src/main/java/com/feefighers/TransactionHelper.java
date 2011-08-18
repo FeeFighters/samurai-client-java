@@ -6,8 +6,12 @@ import com.feefighers.model.Options;
 import com.feefighers.model.Transaction;
 import com.feefighers.model.Transaction.TransactionRequestType;
 
-public class TransactionHelper {
+public final class TransactionHelper {
 
+	private TransactionHelper() {
+		
+	}
+	
 	public static Transaction generateTransactionAndSetOptions(Options options, boolean defaultCurrency) {
 		Transaction transaction = new Transaction(TransactionRequestType.purchase);
 		

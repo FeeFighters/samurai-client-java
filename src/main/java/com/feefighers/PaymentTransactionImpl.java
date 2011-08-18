@@ -7,16 +7,14 @@ import com.feefighers.model.Transaction;
 public class PaymentTransactionImpl implements PaymentTransaction {
 
 	private Http http;
-	private SamuraiGateway gateway;
 
-	public PaymentTransactionImpl(SamuraiGateway gateway, Http http) {
+	public PaymentTransactionImpl(Http http) {
 		this.http = http;
-		this.gateway = gateway;
 	}
 	
 	@Override
 	public Transaction find(String transactionReferenceId) {
-		String xml = http.get("/transactions/" + transactionReferenceId + ".xml");
+		final String xml = http.get("/transactions/" + transactionReferenceId + ".xml");
 		return Transaction.fromXml(xml);
 	}	
 
@@ -37,7 +35,7 @@ public class PaymentTransactionImpl implements PaymentTransaction {
 
 	protected Transaction execute(String action, Transaction transaction, Double amount,
 			Options options) {
-		Transaction transactionRequest = TransactionHelper.generateTransactionAndSetOptions(options, false);
+		final Transaction transactionRequest = TransactionHelper.generateTransactionAndSetOptions(options, false);
 		if(amount != null) {
 			transactionRequest.setAmount(String.valueOf(amount));
 		} else {
@@ -46,9 +44,8 @@ public class PaymentTransactionImpl implements PaymentTransaction {
 		
 		final String url = "transactions/" +  transaction.getId() + "/" +
 				action + ".xml"; 
-		String xml = http.post(url, transactionRequest.toXml());
+		final String xml = http.post(url, transactionRequest.toXml());
 		
-		Transaction transactionResponse = Transaction.fromXml(xml);
-		return transactionResponse;
+		return Transaction.fromXml(xml);
 	}
 }

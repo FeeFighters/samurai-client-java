@@ -20,7 +20,7 @@ public class ProcessorImpl implements Processor {
 	
 	@Override
 	public PaymentMethod find(String paymentMethodToken) {
-		String xml = http.get("/payment_methods/" + paymentMethodToken + ".xml");
+		String xml = http.get(getPaymentMethodUrl(paymentMethodToken));
 		return PaymentMethod.fromXml(xml);
 	}
 	
@@ -31,7 +31,7 @@ public class ProcessorImpl implements Processor {
 	
 	@Override
 	public PaymentMethod save(PaymentMethod paymentMethod) {
-		http.put("/payment_methods/" + paymentMethod.getPaymentMethodToken() + ".xml", paymentMethod.toXml());
+		http.put(getPaymentMethodUrl(paymentMethod.getId()), paymentMethod.toXml());
 		return paymentMethod;
 	}	
 
@@ -59,26 +59,31 @@ public class ProcessorImpl implements Processor {
 	
 	protected Transaction executeTransaction(TransactionRequestType type, String paymentMethodToken, double amount,
 			Options options) {
-		Transaction transaction = TransactionHelper.generateTransactionAndSetOptions(options, true);
+		final Transaction transaction = TransactionHelper.generateTransactionAndSetOptions(options, true);
 		transaction.setPaymentMethodToken(paymentMethodToken);
 		transaction.setAmount(String.valueOf(amount));
 		
 		final String url = "processors/" + gateway.getProcessorToken() + "/" +
 				type.name().toLowerCase() + ".xml"; 
-		String xml = http.post(url, transaction.toXml());
+		final String xml = http.post(url, transaction.toXml());
 		
-		Transaction ret = Transaction.fromXml(xml);
-		return ret;
+		return Transaction.fromXml(xml);
 	}
 	
 	protected PaymentMethod executePaymentMethod(String action, PaymentMethod paymentMethod) {		
-		final String url = "payment_methods/" + paymentMethod.getId() + "/" + action + ".xml";
+		final String url = getPaymentMethodUrl(paymentMethod.getId(), action);
 		final String requestXml = paymentMethod.toXml();
 		
 		final String responseXml = http.post(url, requestXml);
 		
-		final PaymentMethod ret = PaymentMethod.fromXml(responseXml);
-		return ret;
+		return PaymentMethod.fromXml(responseXml);
 	}
 
+	protected String getPaymentMethodUrl(String id) {
+		return "/payment_methods/" + id + ".xml";
+	}
+	
+	protected String getPaymentMethodUrl(String id, String action) {
+		return "payment_methods/" + id + "/" + action + ".xml";
+	}
 }

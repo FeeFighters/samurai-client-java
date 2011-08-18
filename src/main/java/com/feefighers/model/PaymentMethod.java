@@ -1,5 +1,6 @@
 package com.feefighers.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -9,8 +10,10 @@ import org.apache.commons.lang.math.NumberUtils;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("payment_method")
-public class PaymentMethod {
+public class PaymentMethod implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@XStreamAlias("payment_method_token")
 	private String paymentMethodToken;
 	
@@ -124,19 +127,19 @@ public class PaymentMethod {
 	}
 
 	public Date getCreatedAt() {
-		return createdAt;
+		return createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+		this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	public Date getUpdatedAt() {
-		return updatedAt;
+		return updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+		this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	public String getCustom() {
