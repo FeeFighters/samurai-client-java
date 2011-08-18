@@ -2,6 +2,7 @@ package com.feefighers.http;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -26,7 +27,9 @@ import org.apache.http.params.HttpProtocolParams;
 
 public class Http {
 
-    private static final String DEFAULT_CONTENT_TYPE = "application/xml";
+    private static final String CONTENT_CHARSET = "UTF-8";
+	private static final String SAMURAI_USER_AGENT = "Samurai Java Client";
+	private static final String DEFAULT_CONTENT_TYPE = "application/xml";
 
 	enum RequestMethod {
         GET, POST, PUT
@@ -67,44 +70,13 @@ public class Http {
 		try {
 			HttpParams httpParams = new BasicHttpParams();
 			HttpProtocolParams.setVersion(httpParams, HttpVersion.HTTP_1_1);
-			HttpProtocolParams.setContentCharset(httpParams, "UTF-8");
-			HttpProtocolParams.setUserAgent(httpParams, "Samurai Java Client");
+			HttpProtocolParams.setContentCharset(httpParams, CONTENT_CHARSET);
+			HttpProtocolParams.setUserAgent(httpParams, SAMURAI_USER_AGENT);
 			
 			client = new DefaultHttpClient(httpParams);
 
 			String uri = baseUrl + (url.startsWith("/") ? url : "/" + url);
-			HttpUriRequest request = null;
-			HttpEntityEnclosingRequest entityRequest = null;
-			
-			if(RequestMethod.GET.equals(requestMethod)) {
-				request = new HttpGet(uri);
-			} else if(RequestMethod.POST.equals(requestMethod)) {
-				HttpPost postRequest = new HttpPost(uri);
-				request = postRequest;
-				entityRequest = postRequest;
-			} else if(RequestMethod.PUT.equals(requestMethod)) {
-				HttpPut putRequest = new HttpPut(uri);
-				request = putRequest;
-				entityRequest = putRequest;
-			} else {
-				throw new HttpException("Unknown request method " + requestMethod.name());
-			}
-			
-			if(entityRequest != null) {
-				if(StringUtils.isNotBlank(body)) {
-					entityRequest.setEntity(new StringEntity(body));
-				}
-				if(contentType != null) {
-					entityRequest.addHeader("Content-Type", contentType);
-				}
-			}
-			
-			if(StringUtils.isNotBlank(username)) {
-				Credentials creds = new UsernamePasswordCredentials(username, password);
-				request.addHeader(new BasicScheme().authenticate(creds, request));
-			}
-			request.setHeader("Connection", "close");
-			request.setHeader("Accept", "*/*");
+			HttpUriRequest request = createHttpRequest(requestMethod, body, contentType, uri);
 			
 			HttpResponse response = client.execute(request);
 			checkHttpStatus(response);
@@ -128,6 +100,46 @@ public class Http {
 			}
 		}    	
     }
+
+	protected HttpUriRequest createHttpRequest(RequestMethod requestMethod, String body,
+			String contentType, String uri)
+			throws UnsupportedEncodingException, AuthenticationException {
+		HttpUriRequest request = null;
+		HttpEntityEnclosingRequest entityRequest = null;
+		
+		if(RequestMethod.GET.equals(requestMethod)) {
+			request = new HttpGet(uri);
+		} else if(RequestMethod.POST.equals(requestMethod)) {
+			HttpPost postRequest = new HttpPost(uri);
+			request = postRequest;
+			entityRequest = postRequest;
+		} else if(RequestMethod.PUT.equals(requestMethod)) {
+			HttpPut putRequest = new HttpPut(uri);
+			request = putRequest;
+			entityRequest = putRequest;
+		} else {
+			throw new HttpException("Unknown request method " + requestMethod.name());
+		}
+		
+		if(entityRequest != null) {
+			if(StringUtils.isNotBlank(body)) {
+				entityRequest.setEntity(new StringEntity(body));
+			}
+			if(contentType != null) {
+				entityRequest.addHeader("Content-Type", contentType);
+			}
+		}
+		
+		if(StringUtils.isNotBlank(username)) {
+			Credentials creds = new UsernamePasswordCredentials(username, password);
+			request.addHeader(new BasicScheme().authenticate(creds, request));
+		}
+		
+		request.setHeader("Connection", "close");
+		request.setHeader("Accept", "*/*");
+		
+		return request;
+	}
     
     public static void checkHttpStatus(HttpResponse response) {
     	int statusCode = response.getStatusLine().getStatusCode();

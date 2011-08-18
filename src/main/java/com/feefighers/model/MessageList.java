@@ -49,12 +49,15 @@ public class MessageList implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		final MessageList other = (MessageList) obj;
 		return new EqualsBuilder()
 			.appendSuper(super.equals(obj))
