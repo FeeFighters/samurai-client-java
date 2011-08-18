@@ -2,6 +2,8 @@ package com.feefighers.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -53,16 +55,12 @@ public class ProcessorResponse implements Serializable{
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((avsResultCode == null) ? 0 : avsResultCode.hashCode());
-		result = prime * result
-				+ ((messageList == null) ? 0 : messageList.hashCode());
-		result = prime * result
-				+ ((processorData == null) ? 0 : processorData.hashCode());
-		result = prime * result + ((success == null) ? 0 : success.hashCode());
-		return result;
+		return new HashCodeBuilder()
+			.append(avsResultCode)
+			.append(messageList)
+			.append(processorData)
+			.append(success)
+			.toHashCode();
 	}
 
 	@Override
@@ -73,37 +71,22 @@ public class ProcessorResponse implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProcessorResponse other = (ProcessorResponse) obj;
-		if (avsResultCode == null) {
-			if (other.avsResultCode != null)
-				return false;
-		} else if (!avsResultCode.equals(other.avsResultCode))
-			return false;
-		if (messageList == null) {
-			if (other.messageList != null)
-				return false;
-		} else if (!messageList.equals(other.messageList))
-			return false;
-		if (processorData == null) {
-			if (other.processorData != null)
-				return false;
-		} else if (!processorData.equals(other.processorData))
-			return false;
-		if (success == null) {
-			if (other.success != null)
-				return false;
-		} else if (!success.equals(other.success))
-			return false;
-		return true;
+		final ProcessorResponse other = (ProcessorResponse) obj;
+		return new EqualsBuilder()
+			.append(avsResultCode, other.avsResultCode)
+			.append(messageList, other.messageList)
+			.append(processorData, other.processorData)
+			.append(success, other.success)
+			.isEquals();
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
-			.append("success", this.success)
+			.append("avsResultCode", this.avsResultCode)		
 			.append("messageList", this.messageList)
 			.append("processorData", this.processorData)
-			.append("avsResultCode", this.avsResultCode)
+			.append("success", this.success)
 			.toString();
 	}
 	

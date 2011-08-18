@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -39,11 +41,10 @@ public class MessageList implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((list == null) ? 0 : list.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
+		return new HashCodeBuilder()
+			.append(list)
+			.append(type)
+			.toHashCode();
 	}
 
 	@Override
@@ -54,18 +55,12 @@ public class MessageList implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MessageList other = (MessageList) obj;
-		if (list == null) {
-			if (other.list != null)
-				return false;
-		} else if (!list.equals(other.list))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
+		final MessageList other = (MessageList) obj;
+		return new EqualsBuilder()
+			.appendSuper(super.equals(obj))
+			.append(list, other.list)
+			.append(type, other.type)
+			.isEquals();
 	}
 
 	

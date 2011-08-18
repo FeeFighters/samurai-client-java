@@ -1,5 +1,9 @@
 package com.feefighers.model;
 
+import java.io.Serializable;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -7,8 +11,10 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 @XStreamAlias("message")
 @XStreamConverter(MessageConverter.class)
-public class Message {
+public class Message implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private String messageClass;
 
 	private String messageSubClass;
@@ -61,26 +67,23 @@ public class Message {
 	@Override
 	public String toString() {		
 		return new ToStringBuilder(this)
+			.append("context", this.context)
+			.append("key", this.key)		
 			.append("messageClass", this.messageClass)
 			.append("messageSubClass", this.messageSubClass)
-			.append("context", this.context)
-			.append("key", this.key)
 			.append("value", this.value)
 			.toString();
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((context == null) ? 0 : context.hashCode());
-		result = prime * result + ((key == null) ? 0 : key.hashCode());
-		result = prime * result
-				+ ((messageClass == null) ? 0 : messageClass.hashCode());
-		result = prime * result
-				+ ((messageSubClass == null) ? 0 : messageSubClass.hashCode());
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
-		return result;
+		return new HashCodeBuilder()
+			.append(context)
+			.append(key)
+			.append(messageClass)
+			.append(messageSubClass)
+			.append(value)
+			.toHashCode();
 	}
 
 	@Override
@@ -91,33 +94,14 @@ public class Message {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Message other = (Message) obj;
-		if (context == null) {
-			if (other.context != null)
-				return false;
-		} else if (!context.equals(other.context))
-			return false;
-		if (key == null) {
-			if (other.key != null)
-				return false;
-		} else if (!key.equals(other.key))
-			return false;
-		if (messageClass == null) {
-			if (other.messageClass != null)
-				return false;
-		} else if (!messageClass.equals(other.messageClass))
-			return false;
-		if (messageSubClass == null) {
-			if (other.messageSubClass != null)
-				return false;
-		} else if (!messageSubClass.equals(other.messageSubClass))
-			return false;
-		if (value == null) {
-			if (other.value != null)
-				return false;
-		} else if (!value.equals(other.value))
-			return false;
-		return true;
+		final Message other = (Message) obj;
+		return new EqualsBuilder()
+			.append(context, other.context)
+			.append(key, other.key)
+			.append(messageClass, other.messageClass)
+			.append(messageSubClass, other.messageSubClass)
+			.append(value, other.value)
+			.isEquals();
 	}
 	
 	

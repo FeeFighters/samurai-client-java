@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.math.NumberUtils;
 
@@ -277,65 +279,53 @@ public class PaymentMethod implements Serializable {
 	@Override
 	public String toString() {		
 		return new ToStringBuilder(this)
-			.append("address1", this.address1)
-			.append("address2", this.address2)
-			.append("cardType", this.cardType)
-			.append("city", this.city)
-			.append("country", this.country)
-			.append("custom", this.custom)
-			.append("firstName", this.firstName)
-			.append("lastFourDigits", this.lastFourDigits)
-			.append("lastName", this.lastName)
-			.append("paymentMethodToken", this.paymentMethodToken)
-			.append("state", this.state)
-			.append("zip", this.zip)
+			.append("address1", address1)
+			.append("address2", address2)
+			.append("cardType", cardType)
+			.append("city", city)
+			.append("country", country)
+			.append("createdAt", createdAt)
+			.append("custom", custom)
+			.append("expiryMonth", expiryMonth)
+			.append("expiryYear", expiryYear)
+			.append("firstName", firstName)
+			.append("lastFourDigits", lastFourDigits)
+			.append("lastName", lastName)
+			.append("messageList", messageList)
+			.append("paymentMethodToken", paymentMethodToken)
+			.append("redacted", redacted)
+			.append("retained", retained)
+			.append("sensitiveDataValid", sensitiveDataValid)
+			.append("state", state)
+			.append("updatedAt", updatedAt)
+			.append("zip", zip)
 			.toString();
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((address1 == null) ? 0 : address1.hashCode());
-		result = prime * result
-				+ ((address2 == null) ? 0 : address2.hashCode());
-		result = prime * result
-				+ ((cardType == null) ? 0 : cardType.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result
-				+ ((createdAt == null) ? 0 : createdAt.hashCode());
-		result = prime * result + ((custom == null) ? 0 : custom.hashCode());
-		result = prime * result
-				+ ((expiryMonth == null) ? 0 : expiryMonth.hashCode());
-		result = prime * result
-				+ ((expiryYear == null) ? 0 : expiryYear.hashCode());
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result
-				+ ((lastFourDigits == null) ? 0 : lastFourDigits.hashCode());
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result
-				+ ((messageList == null) ? 0 : messageList.hashCode());
-		result = prime
-				* result
-				+ ((paymentMethodToken == null) ? 0 : paymentMethodToken
-						.hashCode());
-		result = prime * result
-				+ ((redacted == null) ? 0 : redacted.hashCode());
-		result = prime * result
-				+ ((retained == null) ? 0 : retained.hashCode());
-		result = prime
-				* result
-				+ ((sensitiveDataValid == null) ? 0 : sensitiveDataValid
-						.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result
-				+ ((updatedAt == null) ? 0 : updatedAt.hashCode());
-		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
-		return result;
+		return new HashCodeBuilder()
+			.append(address1)
+			.append(address2)
+			.append(cardType)
+			.append(city)
+			.append(country)
+			.append(createdAt)
+			.append(custom)
+			.append(expiryMonth)
+			.append(expiryYear)
+			.append(firstName)
+			.append(lastFourDigits)
+			.append(lastName)
+//			.append(messageList)
+			.append(paymentMethodToken)
+			.append(redacted)
+			.append(retained)
+			.append(sensitiveDataValid)
+			.append(state)
+			.append(updatedAt)
+			.append(zip)
+			.toHashCode();		
 	}
 
 	@Override
@@ -346,108 +336,29 @@ public class PaymentMethod implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PaymentMethod other = (PaymentMethod) obj;
-		if (address1 == null) {
-			if (other.address1 != null)
-				return false;
-		} else if (!address1.equals(other.address1))
-			return false;
-		if (address2 == null) {
-			if (other.address2 != null)
-				return false;
-		} else if (!address2.equals(other.address2))
-			return false;
-		if (cardType == null) {
-			if (other.cardType != null)
-				return false;
-		} else if (!cardType.equals(other.cardType))
-			return false;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
-		if (createdAt == null) {
-			if (other.createdAt != null)
-				return false;
-		} else if (!createdAt.equals(other.createdAt))
-			return false;
-		if (custom == null) {
-			if (other.custom != null)
-				return false;
-		} else if (!custom.equals(other.custom))
-			return false;
-		if (expiryMonth == null) {
-			if (other.expiryMonth != null)
-				return false;
-		} else if (!expiryMonth.equals(other.expiryMonth))
-			return false;
-		if (expiryYear == null) {
-			if (other.expiryYear != null)
-				return false;
-		} else if (!expiryYear.equals(other.expiryYear))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastFourDigits == null) {
-			if (other.lastFourDigits != null)
-				return false;
-		} else if (!lastFourDigits.equals(other.lastFourDigits))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (messageList == null) {
-			if (other.messageList != null)
-				return false;
-		} else if (!messageList.equals(other.messageList))
-			return false;
-		if (paymentMethodToken == null) {
-			if (other.paymentMethodToken != null)
-				return false;
-		} else if (!paymentMethodToken.equals(other.paymentMethodToken))
-			return false;
-		if (redacted == null) {
-			if (other.redacted != null)
-				return false;
-		} else if (!redacted.equals(other.redacted))
-			return false;
-		if (retained == null) {
-			if (other.retained != null)
-				return false;
-		} else if (!retained.equals(other.retained))
-			return false;
-		if (sensitiveDataValid == null) {
-			if (other.sensitiveDataValid != null)
-				return false;
-		} else if (!sensitiveDataValid.equals(other.sensitiveDataValid))
-			return false;
-		if (state == null) {
-			if (other.state != null)
-				return false;
-		} else if (!state.equals(other.state))
-			return false;
-		if (updatedAt == null) {
-			if (other.updatedAt != null)
-				return false;
-		} else if (!updatedAt.equals(other.updatedAt))
-			return false;
-		if (zip == null) {
-			if (other.zip != null)
-				return false;
-		} else if (!zip.equals(other.zip))
-			return false;
-		return true;
+		final PaymentMethod other = (PaymentMethod) obj;
+		return new EqualsBuilder()
+			.append(address1, other.address1)
+			.append(address2, other.address2)
+			.append(cardType, other.cardType)
+			.append(city, other.city)
+			.append(country, other.country)
+			.append(createdAt, other.createdAt)
+			.append(custom, other.custom)
+			.append(expiryMonth, other.expiryMonth)
+			.append(expiryYear, other.expiryYear)
+			.append(firstName, other.firstName)
+			.append(lastFourDigits, other.lastFourDigits)
+			.append(lastName, other.lastName)
+//			.append(messageList, other.messageList)
+			.append(paymentMethodToken, other.paymentMethodToken)
+			.append(redacted, other.redacted)
+			.append(retained, other.retained)
+			.append(sensitiveDataValid, other.sensitiveDataValid)
+			.append(state, other.state)
+			.append(updatedAt, other.updatedAt)
+			.append(zip, other.zip)
+			.isEquals();
 	}
 	
 	
