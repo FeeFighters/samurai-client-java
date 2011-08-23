@@ -33,9 +33,9 @@ API usage
 
 ### Classpath
 
-After compiling the library as described in the previous point, you need to add the Samurai Java Client Library dependency to your classpath.
+After compiling the library as described in the previous point, you need to add the Samurai Java Client Library to your project's classpath.
 
-If you use Maven you can achieve that by simply adding the following lines to your `pom.xml`:
+If you use Maven you can achieve that by adding the following dependency to your `pom.xml`:
  
     <dependency>
       <groupId>com.feefighers</groupId>
@@ -45,7 +45,7 @@ If you use Maven you can achieve that by simply adding the following lines to yo
     
 ### Gateway
 
-To use the library you have to create a new instance of com.feefighers.SamuraiGateway.
+To use the library you have to create a new instance of `com.feefighers.SamuraiGateway`.
 
     com.feefighers.SamuraiGateway gateway = new om.feefighers.SamuraiGateway(merchantKey, merchantPassword, processorToken);
 
