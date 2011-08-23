@@ -107,6 +107,7 @@ parameter containing the `payment_method_token`. You should save the
 To retrieve the payment method and ensure that the sensitive data is valid:
 
     com.feefighers.model.PaymentProcessor pm = gateway.processor().find(payment_method_token);
+    pm.getSensitiveDataValid();
 
 **NB:** Samurai will not validate any non-sensitive data so it is up to your
 application to perform any additional validation on the payment_method.
@@ -158,7 +159,8 @@ An authorization is created the same way:
     com.feefighers.model.Transaction authorization = gateway.processor().authorize(payment_method_token, amount, options);
     String authorizationReferenceId = purchase.getReferenceId(); // save this value, you can find the transaction with it later    
 
-You can specify options for either transaction type. Options is a com.feefighers.model.TransactionOptions instance that may contain:
+You can specify options for either transaction type. 
+Options is a `com.feefighers.model.TransactionOptions` instance that may contain:
 
 * descriptor: a string description of the charge
 * billingReference: a string reference for the transaction
