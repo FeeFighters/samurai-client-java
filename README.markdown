@@ -12,7 +12,7 @@ To build the library you need the following:
 Build steps
 -----------
 
-In the directory with the library invoke the following command:
+In the directory with the library sources invoke the following command:
 
     mvn install
     
@@ -31,6 +31,18 @@ This will result in creating file:
 API usage
 ---------
 
+### Classpath
+
+After compiling the library as described in the previous point, you need to add the Samurai Java Client Library dependency to your classpath.
+
+If you use Maven you can achieve that by simply adding the following lines to your `pom.xml`:
+ 
+    <dependency>
+      <groupId>com.feefighers</groupId>
+      <artifactId>samurai</artifactId>
+      <version>1.0</version>
+    </dependency>    
+    
 ### Gateway
 
 To use the library you have to create a new instance of com.feefighers.SamuraiGateway.

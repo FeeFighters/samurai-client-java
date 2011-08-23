@@ -11,6 +11,8 @@ public class SamuraiGateway implements Serializable {
 	private String merchantKey;
 	private String merchantPassword;
 	private String processorToken;
+	
+	private boolean debug;
 		
 	public SamuraiGateway(String merchantKey, String merchantPassword,
 			String processorToken) {
@@ -20,9 +22,13 @@ public class SamuraiGateway implements Serializable {
 		this.processorToken = processorToken;
 	}
 	
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
+	
 	public String getMerchantKey() {
 		return merchantKey;
-	}
+	}	
 	
 	public String getMerchantPassword() {
 		return merchantPassword;
@@ -41,6 +47,9 @@ public class SamuraiGateway implements Serializable {
 	}
 
 	private Http newHttpInstance() {
+		if(debug) {
+			Http.enableDebug();
+		}
 		return new Http(merchantKey, merchantPassword, "https://samurai.feefighters.com/v1");
 	}	
 	

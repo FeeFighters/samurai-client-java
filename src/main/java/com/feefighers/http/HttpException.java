@@ -1,5 +1,7 @@
 package com.feefighers.http;
 
+import org.apache.commons.lang.StringUtils;
+
 public class HttpException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +32,7 @@ public class HttpException extends RuntimeException {
 	
 	@Override
 	public String getMessage() {
-		String superMessage = super.getMessage();
+		String superMessage = StringUtils.defaultString(super.getMessage());
 		if(statusCode != null) {
 			superMessage += "(status code: " + statusCode + ")";
 		}
