@@ -25,7 +25,7 @@ public class PaymentMethodTest {
 	public void createNewPaymentMethod() throws IOException {
 		config = new Properties();
 		config.load(getClass().getResourceAsStream("/config.properties"));
-		
+
 		paymentMethodRequest = newPaymentMethodRequest();
 		paymentMethodToken = createPaymentMethod(paymentMethodRequest);
 		
@@ -34,7 +34,7 @@ public class PaymentMethodTest {
 	}
 	
 	@Test
-	public void shouldGetPaymentMethodFromServer() throws Exception {						
+	public void shouldGetPaymentMethodFromServer() throws Exception {	
 		final PaymentMethod paymentMethod = gateway.processor().find(paymentMethodToken);
 		
 		Assert.assertNotNull(paymentMethod);

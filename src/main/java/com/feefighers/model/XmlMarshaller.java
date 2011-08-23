@@ -1,5 +1,7 @@
 package com.feefighers.model;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -45,7 +47,8 @@ public final class XmlMarshaller {
 		@Override
 		public Object unmarshal(HierarchicalStreamReader reader,
 				UnmarshallingContext context) {			
-			return converter.fromString(reader.getValue());
+			String value = reader.getValue();
+			return StringUtils.isNotBlank(value) ? converter.fromString(value) : null;
 		}
 	}
 		
