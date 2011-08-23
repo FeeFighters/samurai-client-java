@@ -24,7 +24,7 @@
   <groupId>com.feefighers</groupId>
   <artifactId>samurai</artifactId>
   <packaging>jar</packaging>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0</version>
 
   <name>Samurai Client Java</name>
   <url>http://feefighters.com/</url>
@@ -102,7 +102,17 @@
 		    </excludes>
 		  </configuration>		
       </plugin>
-    </plugins>
+
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>          
+      
+    </plugins>      
   </build>
   
   <profiles>
