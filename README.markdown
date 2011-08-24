@@ -38,16 +38,16 @@ After compiling the library as described in the previous point, you need to add 
 If you use Maven you can achieve that by adding the following dependency to your `pom.xml`:
  
     <dependency>
-      <groupId>com.feefighers</groupId>
+      <groupId>com.feefighters</groupId>
       <artifactId>samurai</artifactId>
       <version>1.0</version>
     </dependency>    
     
 ### Gateway
 
-To use the library you have to create a new instance of `com.feefighers.SamuraiGateway`.
+To use the library you have to create a new instance of `com.feefighters.SamuraiGateway`.
 
-    com.feefighers.SamuraiGateway gateway = new om.feefighers.SamuraiGateway(merchantKey, merchantPassword, processorToken);
+    com.feefighters.SamuraiGateway gateway = new om.feefighters.SamuraiGateway(merchantKey, merchantPassword, processorToken);
 
 ### Payment Methods
 
@@ -118,7 +118,7 @@ parameter containing the `payment_method_token`. You should save the
 
 To retrieve the payment method and ensure that the sensitive data is valid:
 
-    com.feefighers.model.PaymentProcessor pm = gateway.processor().find(payment_method_token);
+    com.feefighters.model.PaymentProcessor pm = gateway.processor().find(payment_method_token);
     pm.getSensitiveDataValid();
 
 **NB:** Samurai will not validate any non-sensitive data so it is up to your
@@ -163,16 +163,16 @@ method, Samurai needs to know which of your processors you want to use. You can
 initiate a purchase (if your processor supports it) or an authorization against
 a processor by:
     
-    com.feefighers.model.Transaction purchase = gateway.processor().purchase(payment_method_token, amount, options);
+    com.feefighters.model.Transaction purchase = gateway.processor().purchase(payment_method_token, amount, options);
     String purchaseReferenceId = purchase.getReferenceId(); // save this value, you can find the transaction with it later
 
 An authorization is created the same way:
 
-    com.feefighers.model.Transaction authorization = gateway.processor().authorize(payment_method_token, amount, options);
+    com.feefighters.model.Transaction authorization = gateway.processor().authorize(payment_method_token, amount, options);
     String authorizationReferenceId = purchase.getReferenceId(); // save this value, you can find the transaction with it later    
 
 You can specify options for either transaction type. 
-Options is a `com.feefighers.model.TransactionOptions` instance that may contain:
+Options is a `com.feefighters.model.TransactionOptions` instance that may contain:
 
 * descriptor: a string description of the charge
 * billingReference: a string reference for the transaction
@@ -184,8 +184,8 @@ Options is a `com.feefighers.model.TransactionOptions` instance that may contain
 An authorization only puts a hold on the funds that you specified. It won't
 capture the money. You'll need to call capture on the authorization to do this.
     
-    com.feefighers.model.Transaction authorization = gateway.transaction().find(authorizationReferenceId);
-    com.feefighers.model.Transaction capture = gateway.transaction().capture(authorization, amount, options);
+    com.feefighters.model.Transaction authorization = gateway.transaction().find(authorizationReferenceId);
+    com.feefighters.model.Transaction capture = gateway.transaction().capture(authorization, amount, options);
     
 #### Voiding a Transaction
 
@@ -193,8 +193,8 @@ A transaction that was recently created can be voided, if is has not been
 settled. A transaction that has settled has already deposited funds into your
 merchant account.
 
-    com.feefighers.model.Transaction transaction = gateway.transaction().find(purchaseReferenceId);
-    com.feefighers.model.Transaction voidTransaction = gateway.transaction().voidOperation(transaction, options);
+    com.feefighters.model.Transaction transaction = gateway.transaction().find(purchaseReferenceId);
+    com.feefighters.model.Transaction voidTransaction = gateway.transaction().voidOperation(transaction, options);
     
 
 #### Crediting a Transaction
@@ -202,6 +202,6 @@ merchant account.
 Once a captured authorization or purchase has settled, you need to credit the
 transaction if you want to reverse a charge.
 
-    com.feefighers.model.Transaction purchase = gateway.transaction().find(purchaseReferenceId);
-    com.feefighers.model.Transaction credit = gateway.transaction().credit(purchase, amount, options);    
+    com.feefighters.model.Transaction purchase = gateway.transaction().find(purchaseReferenceId);
+    com.feefighters.model.Transaction credit = gateway.transaction().credit(purchase, amount, options);    
     

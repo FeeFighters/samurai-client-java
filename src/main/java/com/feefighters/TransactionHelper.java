@@ -1,9 +1,9 @@
-package com.feefighers;
+package com.feefighters;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.feefighers.model.TransactionOptions;
-import com.feefighers.model.Transaction;
+import com.feefighters.model.Transaction;
+import com.feefighters.model.TransactionOptions;
 
 public final class TransactionHelper {
 

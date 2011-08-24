@@ -21,7 +21,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.feefighers</groupId>
+  <groupId>com.feefighters</groupId>
   <artifactId>samurai</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>

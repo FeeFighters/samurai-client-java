@@ -1,4 +1,4 @@
-package com.feefighers.model;
+package com.feefighters.model;
 
 import java.beans.PropertyDescriptor;
 import java.text.SimpleDateFormat;
@@ -8,6 +8,9 @@ import java.util.Map;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.feefighters.model.PaymentMethod;
+import com.feefighters.model.XmlMarshaller;
 
 public class PaymentMethodMapTest {
 	@Test

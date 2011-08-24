@@ -5,7 +5,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.feefighers.http.Http;
+import com.feefighters.http.Http;
 
 public class PaymentMethodHelper {
 

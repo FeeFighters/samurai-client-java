@@ -1,6 +1,6 @@
-package com.feefighers.model;
+package com.feefighters.model;
 
-import com.feefighers.model.Transaction.TransactionRequestType;
+import com.feefighters.model.Transaction.TransactionRequestType;
 
 public class TransactionOptions {
 

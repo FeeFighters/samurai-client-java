@@ -1,7 +1,7 @@
-package com.feefighers;
+package com.feefighters;
 
-import com.feefighers.model.Transaction;
-import com.feefighers.model.TransactionOptions;
+import com.feefighters.model.Transaction;
+import com.feefighters.model.TransactionOptions;
 
 public interface PaymentTransaction {
 

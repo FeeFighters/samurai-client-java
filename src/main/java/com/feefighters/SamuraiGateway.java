@@ -1,8 +1,8 @@
-package com.feefighers;
+package com.feefighters;
 
 import java.io.Serializable;
 
-import com.feefighers.http.Http;
+import com.feefighters.http.Http;
 
 public class SamuraiGateway implements Serializable {
 

@@ -9,8 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.feefighers.SamuraiGateway;
-import com.feefighers.model.Transaction;
+import com.feefighters.SamuraiGateway;
+import com.feefighters.model.Transaction;
 
 public class TransactionTest {
 	private SamuraiGateway gateway;

@@ -1,10 +1,10 @@
-package com.feefighers;
+package com.feefighters;
 
 import java.util.Map;
 
-import com.feefighers.model.TransactionOptions;
-import com.feefighers.model.PaymentMethod;
-import com.feefighers.model.Transaction;
+import com.feefighters.model.PaymentMethod;
+import com.feefighters.model.Transaction;
+import com.feefighters.model.TransactionOptions;
 
 public interface Processor {
 	

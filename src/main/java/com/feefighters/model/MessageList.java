@@ -1,4 +1,4 @@
-package com.feefighers.model;
+package com.feefighters.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

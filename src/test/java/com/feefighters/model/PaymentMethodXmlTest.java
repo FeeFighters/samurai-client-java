@@ -1,4 +1,4 @@
-package com.feefighers.model;
+package com.feefighters.model;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -7,6 +7,10 @@ import java.util.Date;
 import org.apache.commons.io.IOUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.feefighters.model.Message;
+import com.feefighters.model.PaymentMethod;
+import com.feefighters.model.XmlMarshaller;
 
 public class PaymentMethodXmlTest {
 	

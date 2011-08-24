@@ -1,4 +1,4 @@
-package com.feefighers.http;
+package com.feefighters.http;
 
 import org.apache.commons.lang.StringUtils;
 

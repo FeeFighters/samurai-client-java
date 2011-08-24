@@ -1,4 +1,4 @@
-package com.feefighers.http;
+package com.feefighters.http;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -6,8 +6,8 @@ import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequest;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.feefighers.SamuraiGateway;
-import com.feefighers.model.Transaction;
+import com.feefighters.SamuraiGateway;
+import com.feefighters.model.Transaction;
 
 public class TransactionHelper {
 

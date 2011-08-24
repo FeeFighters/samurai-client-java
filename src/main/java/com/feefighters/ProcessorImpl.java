@@ -1,12 +1,12 @@
-package com.feefighers;
+package com.feefighters;
 
 import java.util.Map;
 
-import com.feefighers.http.Http;
-import com.feefighers.model.TransactionOptions;
-import com.feefighers.model.PaymentMethod;
-import com.feefighers.model.Transaction;
-import com.feefighers.model.Transaction.TransactionRequestType;
+import com.feefighters.http.Http;
+import com.feefighters.model.PaymentMethod;
+import com.feefighters.model.Transaction;
+import com.feefighters.model.TransactionOptions;
+import com.feefighters.model.Transaction.TransactionRequestType;
 
 public class ProcessorImpl implements Processor {
 

@@ -1,4 +1,4 @@
-package com.feefighers.model;
+package com.feefighters.model;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
