@@ -75,6 +75,19 @@
       <version>1.8.3</version>
       <scope>test</scope> 
     </dependency>      
+    
+   <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-testng</artifactId>
+      <version>1.4.10</version>
+      <scope>test</scope>
+   </dependency>
+   <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <version>1.4.10</version>
+      <scope>test</scope>
+   </dependency>  
             
   </dependencies>
 

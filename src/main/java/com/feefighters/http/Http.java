@@ -31,10 +31,6 @@ public class Http {
 	private static final String SAMURAI_USER_AGENT = "Samurai Java Client";
 	private static final String DEFAULT_CONTENT_TYPE = "application/xml";
 
-	enum RequestMethod {
-        GET, POST, PUT
-    }    
-
     private String username;
     private String password;
     private String baseUrl;
@@ -47,33 +43,28 @@ public class Http {
     }
 
     public String get(String url) {
-        return httpRequest(RequestMethod.GET, url, null, null);
+        return httpRequest(HttpRequestMethod.GET, url, null, null);
     }
     
     public String put(String url, String body) {
-    	return httpRequest(RequestMethod.PUT, url, body, DEFAULT_CONTENT_TYPE);
+    	return httpRequest(HttpRequestMethod.PUT, url, body, DEFAULT_CONTENT_TYPE);
     }
     
     public String post(String url, String body) {
-    	return httpRequest(RequestMethod.POST, url, body, DEFAULT_CONTENT_TYPE);
+    	return httpRequest(HttpRequestMethod.POST, url, body, DEFAULT_CONTENT_TYPE);
     }
     
     public String post(String url, String body, String contentType) {
-    	return httpRequest(RequestMethod.POST, url, body, contentType);
+    	return httpRequest(HttpRequestMethod.POST, url, body, contentType);
     }
 
-	private String httpRequest(RequestMethod requestMethod, String url, String body, String contentType) {
+	private String httpRequest(HttpRequestMethod requestMethod, String url, String body, String contentType) {
 		HttpEntity entity = null;
 		HttpClient client = null;
 		InputStream responseInputStream = null;
 		
-		try {
-			HttpParams httpParams = new BasicHttpParams();
-			HttpProtocolParams.setVersion(httpParams, HttpVersion.HTTP_1_1);
-			HttpProtocolParams.setContentCharset(httpParams, CONTENT_CHARSET);
-			HttpProtocolParams.setUserAgent(httpParams, SAMURAI_USER_AGENT);
-			
-			client = new DefaultHttpClient(httpParams);
+		try {			
+			client = newHttpClientInstance();
 
 			String uri = baseUrl + (url.startsWith("/") ? url : "/" + url);
 			HttpUriRequest request = createHttpRequest(requestMethod, body, contentType, uri);
@@ -101,19 +92,28 @@ public class Http {
 		}    	
     }
 
-	protected HttpUriRequest createHttpRequest(RequestMethod requestMethod, String body,
+	protected DefaultHttpClient newHttpClientInstance() {
+		HttpParams httpParams = new BasicHttpParams();
+		HttpProtocolParams.setVersion(httpParams, HttpVersion.HTTP_1_1);
+		HttpProtocolParams.setContentCharset(httpParams, CONTENT_CHARSET);
+		HttpProtocolParams.setUserAgent(httpParams, SAMURAI_USER_AGENT);
+		
+		return new DefaultHttpClient(httpParams);
+	}
+
+	protected HttpUriRequest createHttpRequest(HttpRequestMethod requestMethod, String body,
 			String contentType, String uri)
 			throws UnsupportedEncodingException, AuthenticationException {
 		HttpUriRequest request = null;
 		HttpEntityEnclosingRequest entityRequest = null;
 		
-		if(RequestMethod.GET.equals(requestMethod)) {
+		if(HttpRequestMethod.GET.equals(requestMethod)) {
 			request = new HttpGet(uri);
-		} else if(RequestMethod.POST.equals(requestMethod)) {
+		} else if(HttpRequestMethod.POST.equals(requestMethod)) {
 			HttpPost postRequest = new HttpPost(uri);
 			request = postRequest;
 			entityRequest = postRequest;
-		} else if(RequestMethod.PUT.equals(requestMethod)) {
+		} else if(HttpRequestMethod.PUT.equals(requestMethod)) {
 			HttpPut putRequest = new HttpPut(uri);
 			request = putRequest;
 			entityRequest = putRequest;
