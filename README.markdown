@@ -58,7 +58,7 @@ A Payment Method is created each time a user stores their billing information in
 o let your customers create a Payment Method, place a credit card
 entry form on your site like the one below.
 
-    <form action="https://samurai.feefighters.com/v1/payment_methods" method="POST">
+    <form action="https://api.samurai.feefighters.com/v1/payment_methods" method="POST">
       <fieldset>
         <input name="redirect_url" type="hidden" value="http://yourdomain.com/anywhere" />
         <input name="merchant_key" type="hidden" value="[Your Merchant Key]" />

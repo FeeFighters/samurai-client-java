@@ -36,7 +36,7 @@ public class PaymentMethodHelper {
 		final Properties config = new Properties();
 		config.load(PaymentMethodHelper.class.getResourceAsStream("/config.properties"));		
 				
-		final Http http = new Http(null, null, "https://samurai.feefighters.com/v1");
+		final Http http = new Http(null, null, "https://api.samurai.feefighters.com/v1");
 		final String body = "redirect_url=http://localhost" 
 				+ "&merchant_key=" + config.getProperty("merchantKey") 
 				+ "&credit_card[first_name]=" + req.firstName
