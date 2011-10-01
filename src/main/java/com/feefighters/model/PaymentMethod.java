@@ -36,6 +36,9 @@ public class PaymentMethod implements Serializable {
 	
 	@XStreamAlias("is_sensitive_data_valid")
 	private Boolean sensitiveDataValid;
+
+  @XStreamAlias("is_expiration_valid")
+  private Boolean expirationValid;
 	
 	@XStreamAlias("messages")
 	private MessageList messageList = new MessageList();

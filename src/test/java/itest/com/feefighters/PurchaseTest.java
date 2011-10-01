@@ -31,7 +31,7 @@ public class PurchaseTest {
 	public void shouldPurchaseMethodPaymentWithValidCreditCardAndReceiveTransaction() throws Exception {
 		String paymentMethodToken = createPaymentMethod(newPaymentMethodRequest());
 		
-		Transaction transaction = gateway.processor().purchase(paymentMethodToken, 10, null);
+		Transaction transaction = gateway.processor().purchase(paymentMethodToken, 100, null);
 		Assert.assertNotNull(transaction);
 		Assert.assertEquals(transaction.getTransactionType(), Transaction.TransactionType.Purchase);
 		Assert.assertNotNull(transaction.getProcessorResponse());
@@ -43,7 +43,7 @@ public class PurchaseTest {
 	public void shouldAuthorizeMethodPaymentWithValidCreditCardAndReceiveTransaction() throws Exception {
 		String paymentMethodToken = createPaymentMethod(newPaymentMethodRequest());
 		
-		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 10, null);
+		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 100, null);
 		Assert.assertNotNull(transaction);
 		Assert.assertEquals(transaction.getTransactionType(), Transaction.TransactionType.Authorize);
 		Assert.assertNotNull(transaction.getProcessorResponse());
@@ -51,12 +51,12 @@ public class PurchaseTest {
 		Assert.assertTrue(transaction.getProcessorResponse().getSuccess());		
 	}
 	
-//	@Test
+	@Test
 	public void shouldNotAuthorizeMethodPaymentWithInvalidCreditCard() throws Exception {
 		String paymentMethodToken = createPaymentMethod(newPaymentMethodRequestWithInvalidCreditCard());
 		
-		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 10, null);
-		Assert.assertFalse(transaction.getProcessorResponse().getSuccess());		
+		Transaction transaction = gateway.processor().authorize(paymentMethodToken, 100, null);
+		Assert.assertFalse(transaction.getProcessorResponse().getSuccess());
 	}	
 	
 }

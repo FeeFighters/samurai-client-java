@@ -4,3 +4,4 @@
 /.settings
 /test-output
 /bin
+/src/test/resources/log4j.properties

@@ -66,6 +66,9 @@ public class Transaction implements Serializable {
 	
 	@XStreamAlias("payment_method_token")
 	private String paymentMethodToken; // request	
+
+  @XStreamAlias("success")
+  private Boolean success; // response
 	
 	static {
 		XmlMarshaller.registerModelClass(Transaction.class);

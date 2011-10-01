@@ -15,7 +15,7 @@ public class PaymentMethodHelper {
 	
 	public static PaymentMethodRequest newPaymentMethodRequestWithInvalidCreditCard() throws IOException {
 		PaymentMethodRequest req = new PaymentMethodRequest();
-		req.cardNumber = "4242424242424242";
+		req.cardNumber = "1234123412341234";
 		return req;
 	}
 	
