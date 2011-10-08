@@ -54,6 +54,12 @@ public class PaymentMethod implements Serializable {
 	
 	@XStreamAlias("last_name")
 	private String lastName;
+
+  @XStreamAlias("card_number")
+  private String cardNumber;
+
+  @XStreamAlias("cvv")
+  private String cvv;
 	
 	@XStreamAlias("expiry_month")
 	private Integer expiryMonth;
@@ -211,10 +217,26 @@ public class PaymentMethod implements Serializable {
 		return lastName;
 	}
 
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+	
+	public String getCvv() {
+		return cvv;
+	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+		
 	public Integer getExpiryMonth() {
 		return expiryMonth;
 	}
@@ -320,7 +342,6 @@ public class PaymentMethod implements Serializable {
 			.append(firstName)
 			.append(lastFourDigits)
 			.append(lastName)
-//			.append(messageList)
 			.append(paymentMethodToken)
 			.append(redacted)
 			.append(retained)
@@ -356,7 +377,6 @@ public class PaymentMethod implements Serializable {
 			.append(firstName, other.firstName)
 			.append(lastFourDigits, other.lastFourDigits)
 			.append(lastName, other.lastName)
-//			.append(messageList, other.messageList)
 			.append(paymentMethodToken, other.paymentMethodToken)
 			.append(redacted, other.redacted)
 			.append(retained, other.retained)
