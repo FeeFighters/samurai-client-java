@@ -52,5 +52,5 @@ To use the library you have to create a new instance of `com.feefighters.Samurai
 
 ### Samurai API Reference
 
-See the [API Reference](https://samurai.feefighters.com/developers/api-reference/java) for a full explanation of how this library works with the Samurai API.
+See the [API Reference](https://samurai.feefighters.com/developers/java/api-reference) for a full explanation of how this library works with the Samurai API.
     
