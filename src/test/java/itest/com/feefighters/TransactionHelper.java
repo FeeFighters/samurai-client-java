@@ -11,7 +11,7 @@ import com.feefighters.model.Transaction;
 
 public class TransactionHelper {
 
-	public static Transaction createTransaction() throws IOException {
+	public static Transaction createPurchase() throws IOException {
 		final Properties config = new Properties();
 		config.load(TransactionHelper.class.getResourceAsStream("/config.properties"));
 

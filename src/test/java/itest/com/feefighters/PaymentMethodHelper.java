@@ -39,8 +39,9 @@ public class PaymentMethodHelper {
 		final Http http = new Http(null, null, "https://api.samurai.feefighters.com/v1");
 		final String body = "redirect_url=http://localhost" 
 				+ "&merchant_key=" + config.getProperty("merchantKey") 
-				+ "&credit_card[first_name]=" + req.firstName
 				+ "&custom=" + req.firstName
+                + "&sandbox=" + true
+				+ "&credit_card[first_name]=" + req.firstName
 				+ "&credit_card[last_name]=" + req.lastName
 				+ "&credit_card[city]=" + req.city
 				+ "&credit_card[state]=" + req.state 
@@ -49,11 +50,10 @@ public class PaymentMethodHelper {
 				+ "&credit_card[cvv]=" + req.cvv
 				+ "&credit_card[expiry_month]=" + req.expiryMonth
 				+ "&credit_card[expiry_year]=" + req.expiryYear;
-		final String output = http.post("payment_methods", body,"application/x-www-form-urlencoded");
-		final Matcher matcher = Pattern.compile("payment_method_token=(.+)\\\"").matcher(output);
+		final String output = http.post("payment_methods/tokenize.json", body, "application/x-www-form-urlencoded");
+		final Matcher matcher = Pattern.compile("payment_method_token\":\"(.+)\"").matcher(output);
 		matcher.find();
-		String paymentMethodToken = matcher.group(1);
-		return paymentMethodToken;
+        return matcher.group(1);
 	}
 	
 }

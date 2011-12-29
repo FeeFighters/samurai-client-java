@@ -25,7 +25,9 @@ public class TransactionXmlTest {
 		Assert.assertEquals(transaction.getCurrencyCode(), 			emptyTransaction.getCurrencyCode());
 		Assert.assertEquals(transaction.getCustom(), 				emptyTransaction.getCustom());
 		Assert.assertEquals(transaction.getCustomerReference(), 	emptyTransaction.getCustomerReference());
-		Assert.assertEquals(transaction.getDescriptor(), 			emptyTransaction.getDescriptor());
+		Assert.assertEquals(transaction.getDescription(), 			emptyTransaction.getDescription());
+		Assert.assertEquals(transaction.getDescriptorName(), 			emptyTransaction.getDescriptorName());
+		Assert.assertEquals(transaction.getDescriptorPhone(), 			emptyTransaction.getDescriptorPhone());
 		Assert.assertEquals(transaction.getPaymentMethodToken(),	emptyTransaction.getPaymentMethodToken());
 	}
 	

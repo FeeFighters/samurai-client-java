@@ -24,7 +24,10 @@ public class ProcessorResponse implements Serializable{
 	
 	@XStreamAlias("avs_result_code")
 	private String avsResultCode;
-	
+
+    @XStreamAlias("cvv_result_code")
+    private String cvvResultCode;
+
 	public void setSuccess(Boolean success) {
 		this.success = success;
 	}
@@ -36,7 +39,10 @@ public class ProcessorResponse implements Serializable{
 	public MessageList getMessageList() {
 		return messageList;
 	}
-	
+    public void setMessageList(MessageList messageList) {
+        this.messageList = messageList;
+    }
+
 	public void setProcessorData(String processorData) {
 		this.processorData = processorData;
 	}
@@ -48,11 +54,17 @@ public class ProcessorResponse implements Serializable{
 	public void setAvsResultCode(String avsResultCode) {
 		this.avsResultCode = avsResultCode;
 	}
-	
 	public String getAvsResultCode() {
 		return avsResultCode;
 	}
-	
+
+    public void setCvvResultCode(String cvvResultCode) {
+        this.cvvResultCode = cvvResultCode;
+    }
+    public String getCvvResultCode() {
+        return cvvResultCode;
+    }
+
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder()

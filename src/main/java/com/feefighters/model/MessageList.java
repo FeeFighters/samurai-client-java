@@ -12,6 +12,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
+@XStreamAlias("messages")
 public class MessageList implements Serializable {
 
 	private static final long serialVersionUID = 1L;

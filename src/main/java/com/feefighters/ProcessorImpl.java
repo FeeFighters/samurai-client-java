@@ -1,12 +1,16 @@
 package com.feefighters;
 
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.feefighters.http.Http;
-import com.feefighters.model.PaymentMethod;
-import com.feefighters.model.Transaction;
-import com.feefighters.model.TransactionOptions;
+import com.feefighters.http.HttpException;
+import com.feefighters.model.*;
 import com.feefighters.model.Transaction.TransactionRequestType;
+import sun.misc.Regexp;
+
+import javax.xml.ws.http.HTTPException;
 
 public class ProcessorImpl implements Processor {
 
@@ -31,8 +35,8 @@ public class ProcessorImpl implements Processor {
 	
 	@Override
 	public PaymentMethod save(PaymentMethod paymentMethod) {
-		http.put(getPaymentMethodUrl(paymentMethod.getId()), paymentMethod.toXml());
-		return paymentMethod;
+		String response = http.put(getPaymentMethodUrl(paymentMethod.getId()), paymentMethod.toXml());
+		return PaymentMethod.fromXml(response);
 	}	
 
 	@Override
@@ -62,12 +66,26 @@ public class ProcessorImpl implements Processor {
 		final Transaction transaction = TransactionHelper.generateTransactionAndSetOptions(options, true);
 		transaction.setPaymentMethodToken(paymentMethodToken);
 		transaction.setAmount(String.valueOf(amount));
-		
-		final String url = "processors/" + gateway.getProcessorToken() + "/" +
-				type.name().toLowerCase() + ".xml"; 
-		final String xml = http.post(url, transaction.toXml());
-		
-		return Transaction.fromXml(xml);
+
+        try {
+            final String url = "processors/" + gateway.getProcessorToken() + "/" + type.name().toLowerCase() + ".xml";
+	    	final String xml = http.post(url, transaction.toXml());
+            return Transaction.fromXml(xml);
+
+        } catch (HttpException ex) {
+            Transaction tx = new Transaction();
+            ProcessorResponse processorResponse = new ProcessorResponse();
+            String errorXml = ex.getMessage();
+            Pattern pattern = Pattern.compile("<messages[^>]*>.*</messages>", Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(errorXml);
+            matcher.find();
+            errorXml = matcher.group();
+            processorResponse.setMessageList((MessageList) XmlMarshaller.fromXml(errorXml));
+            processorResponse.setSuccess(false);
+            tx.setProcessorResponse(processorResponse);
+            return tx;
+        }
+
 	}
 	
 	protected PaymentMethod executePaymentMethod(String action, PaymentMethod paymentMethod) {		

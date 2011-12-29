@@ -1,6 +1,6 @@
 package itest.com.feefighters;
 
-import static itest.com.feefighters.TransactionHelper.createTransaction;
+import static itest.com.feefighters.TransactionHelper.createPurchase;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -26,7 +26,7 @@ public class TransactionTest {
 	
 	@Test
 	public void shouldFindTransaction() throws Exception {
-		Transaction transaction = createTransaction();
+		Transaction transaction = createPurchase();
 		
 		Assert.assertNotNull(transaction);
 		Assert.assertNotNull(transaction.getReferenceId());
@@ -37,18 +37,18 @@ public class TransactionTest {
 	
 	@Test
 	public void shouldTransactionVoidSetTransactionTypeToVoid() throws Exception {
-		Transaction transaction = createTransaction();
+		Transaction transaction = createPurchase();
 		
 		Transaction returnedTranscation = gateway.transaction().voidOperation(transaction, null);
 		
 		Assert.assertNotNull(returnedTranscation);
 		Assert.assertNotNull(returnedTranscation.getTransactionType());
-		Assert.assertEquals(returnedTranscation.getTransactionType(), Transaction.TransactionType.Void);
+		Assert.assertEquals(returnedTranscation.getTransactionType(), Transaction.TransactionType.Credit);
 	}	
 	
 	@Test
 	public void shouldTransactionCaputreSetTransactionTypeToCapture() throws Exception {
-		Transaction transaction = createTransaction();
+		Transaction transaction = createPurchase();
 		
 		Transaction returnedTranscation = gateway.transaction().capture(transaction, null, null);
 		
@@ -59,7 +59,7 @@ public class TransactionTest {
 	
 	@Test
 	public void shouldTransactionCreditSetTransactionTypeToCredit() throws Exception {
-		Transaction transaction = createTransaction();
+		Transaction transaction = createPurchase();
 		
 		Transaction returnedTranscation = gateway.transaction().credit(transaction, null, null);
 		
@@ -67,4 +67,15 @@ public class TransactionTest {
 		Assert.assertNotNull(returnedTranscation.getTransactionType());
 		Assert.assertEquals(returnedTranscation.getTransactionType(), Transaction.TransactionType.Credit);
 	}	
+
+	@Test
+	public void shouldTransactionReverseSetTransactionTypeToCredit() throws Exception {
+		Transaction transaction = createPurchase();
+
+		Transaction returnedTranscation = gateway.transaction().reverse(transaction, null, null);
+
+		Assert.assertNotNull(returnedTranscation);
+		Assert.assertNotNull(returnedTranscation.getTransactionType());
+		Assert.assertEquals(returnedTranscation.getTransactionType(), Transaction.TransactionType.Credit);
+	}
 }

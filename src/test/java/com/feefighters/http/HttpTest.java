@@ -166,7 +166,7 @@ public class HttpTest {
 		try {
 			http.get("geturl");
 		} catch(HttpException ex) {
-			Assert.assertTrue(ex.getMessage().contains("404"));
+			Assert.assertTrue(ex.getMessage().contains("FAIL"));
 			return;
 		}
 		Assert.fail(); // 	@Test(expectedExceptions=HttpException.class) does not work

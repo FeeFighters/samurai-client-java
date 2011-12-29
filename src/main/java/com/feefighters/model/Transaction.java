@@ -31,8 +31,14 @@ public class Transaction implements Serializable {
 	@XStreamAlias("created_at")
 	private Date createdAt; // response	
 
-	@XStreamAlias("descriptor")
-	private String descriptor; // request
+	@XStreamAlias("description")
+	private String description; // request
+
+    @XStreamAlias("descriptor_name")
+    private String descriptorName; // request
+
+    @XStreamAlias("descriptor_phone")
+    private String descriptorPhone; // request
 	
 	@XStreamAlias("custom")
 	private String custom; // request	
@@ -67,8 +73,8 @@ public class Transaction implements Serializable {
 	@XStreamAlias("payment_method_token")
 	private String paymentMethodToken; // request	
 
-  @XStreamAlias("success")
-  private Boolean success; // response
+    @XStreamAlias("success")
+    private Boolean success; // response
 	
 	static {
 		XmlMarshaller.registerModelClass(Transaction.class);
@@ -114,13 +120,27 @@ public class Transaction implements Serializable {
 		this.currencyCode = currencyCode;
 	}
 
-	public String getDescriptor() {
-		return descriptor;
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public void setDescriptor(String descriptor) {
-		this.descriptor = descriptor;
+	public String getDescriptorName() {
+		return descriptorName;
 	}
+	public void setDescriptorName(String descriptorName) {
+		this.descriptorName = descriptorName;
+	}
+
+	public String getDescriptorPhone() {
+		return descriptorPhone;
+	}
+	public void setDescriptorPhone(String descriptorPhone) {
+		this.descriptorPhone = descriptorPhone;
+	}
+
 
 	public String getCustom() {
 		return custom;
@@ -185,7 +205,10 @@ public class Transaction implements Serializable {
 	public ProcessorResponse getProcessorResponse() {
 		return processorResponse;
 	}
-	
+    public void setProcessorResponse(ProcessorResponse processorResponse) {
+        this.processorResponse = processorResponse;
+    }
+
 	public String getProcessorToken() {
 		return processorToken;
 	}
@@ -211,7 +234,9 @@ public class Transaction implements Serializable {
 			.append("currencyCode", currencyCode)
 			.append("custom", custom)
 			.append("customerReference", customerReference)
-			.append("descriptor", descriptor)
+			.append("description", description)
+			.append("descriptorName", descriptorName)
+			.append("descriptorPhone", descriptorPhone)
 			.append("paymentMethod", paymentMethod)			
 			.append("paymentMethodToken", paymentMethodToken)
 			.append("processorResponse", processorResponse)
@@ -232,7 +257,9 @@ public class Transaction implements Serializable {
 			.append(currencyCode)
 			.append(custom)
 			.append(customerReference)
-			.append(descriptor)
+			.append(description)
+			.append(descriptorName)
+			.append(descriptorPhone)
 			.append(paymentMethod)
 			.append(paymentMethodToken)
 			.append(processorResponse)
@@ -263,7 +290,9 @@ public class Transaction implements Serializable {
 			.append(currencyCode, other.currencyCode)
 			.append(custom, other.custom)
 			.append(customerReference, other.customerReference)
-			.append(descriptor, other.descriptor)
+			.append(description, other.description)
+			.append(descriptorName, other.descriptorName)
+			.append(descriptorPhone, other.descriptorPhone)
 			.append(paymentMethod, other.paymentMethod)
 			.append(paymentMethodToken, other.paymentMethodToken)
 			.append(processorResponse, other.processorResponse)

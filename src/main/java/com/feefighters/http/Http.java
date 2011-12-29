@@ -42,23 +42,23 @@ public class Http {
         
     }
 
-    public String get(String url) {
+    public String get(String url) throws HttpException {
         return httpRequest(HttpRequestMethod.GET, url, null, null);
     }
     
-    public String put(String url, String body) {
+    public String put(String url, String body) throws HttpException {
     	return httpRequest(HttpRequestMethod.PUT, url, body, DEFAULT_CONTENT_TYPE);
     }
     
-    public String post(String url, String body) {
+    public String post(String url, String body) throws HttpException {
     	return httpRequest(HttpRequestMethod.POST, url, body, DEFAULT_CONTENT_TYPE);
     }
     
-    public String post(String url, String body, String contentType) {
+    public String post(String url, String body, String contentType) throws HttpException {
     	return httpRequest(HttpRequestMethod.POST, url, body, contentType);
     }
 
-	private String httpRequest(HttpRequestMethod requestMethod, String url, String body, String contentType) {
+	private String httpRequest(HttpRequestMethod requestMethod, String url, String body, String contentType) throws HttpException {
 		HttpEntity entity = null;
 		HttpClient client = null;
 		InputStream responseInputStream = null;
@@ -74,9 +74,8 @@ public class Http {
 			entity = response.getEntity();
 			
 			responseInputStream = entity.getContent();
-			String output = IOUtils.toString(responseInputStream);
-			
-			return output;
+
+            return IOUtils.toString(responseInputStream);
 			
 		} catch (IOException ex) {
 			throw new HttpException(ex);
@@ -144,7 +143,12 @@ public class Http {
     public static void checkHttpStatus(HttpResponse response) {
     	int statusCode = response.getStatusLine().getStatusCode();
         if (isErrorCode(statusCode)) {
-            throw new HttpException(statusCode);
+            try {
+                String body = IOUtils.toString(response.getEntity().getContent());
+                throw new HttpException(body);
+            } catch (IOException ex) {
+                throw new HttpException(ex);
+            }
         }
     }
 

@@ -7,7 +7,9 @@ public class TransactionOptions {
 	private TransactionRequestType type;
 	private Double amount;
 	private String paymentMethodToken;
-	private String descriptor;
+	private String description;
+	private String descriptorName;
+	private String descriptorPhone;
 	private String custom;
 	private String customerReference;
 	private String billingReference;
@@ -31,11 +33,23 @@ public class TransactionOptions {
 	public void setPaymentMethodToken(String paymentMethodToken) {
 		this.paymentMethodToken = paymentMethodToken;
 	}
-	public String getDescriptor() {
-		return descriptor;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescriptor(String descriptor) {
-		this.descriptor = descriptor;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDescriptorName() {
+		return descriptorName;
+	}
+	public void setDescriptorName(String descriptorName) {
+		this.descriptorName = descriptorName;
+	}
+	public String getDescriptorPhone() {
+		return descriptorPhone;
+	}
+	public void setDescriptorPhone(String descriptorPhone) {
+		this.descriptorPhone = descriptorPhone;
 	}
 	public String getCustom() {
 		return custom;

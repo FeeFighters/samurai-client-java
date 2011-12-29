@@ -19,7 +19,9 @@ public final class TransactionHelper {
 			transaction.setAmount(String.valueOf(options.getAmount()));
 			transaction.setPaymentMethodToken(options.getPaymentMethodToken());						
 			
-			transaction.setDescriptor(options.getDescriptor());
+			transaction.setDescription(options.getDescription());
+			transaction.setDescriptorName(options.getDescriptorName());
+			transaction.setDescriptorPhone(options.getDescriptorPhone());
 			transaction.setCustom(options.getCustom());
 			transaction.setCustomerReference(options.getCustomerReference());
 			transaction.setBillingReference(options.getBillingReference());
