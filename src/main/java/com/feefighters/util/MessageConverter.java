@@ -1,5 +1,6 @@
-package com.feefighters.model;
+package com.feefighters.util;
 
+import com.feefighters.Message;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;

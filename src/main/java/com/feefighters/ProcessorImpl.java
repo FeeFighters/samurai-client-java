@@ -6,11 +6,10 @@ import java.util.regex.Pattern;
 
 import com.feefighters.http.Http;
 import com.feefighters.http.HttpException;
-import com.feefighters.model.*;
-import com.feefighters.model.Transaction.TransactionRequestType;
-import sun.misc.Regexp;
-
-import javax.xml.ws.http.HTTPException;
+import com.feefighters.Transaction.TransactionRequestType;
+import com.feefighters.util.TransactionHelper;
+import com.feefighters.util.TransactionOptions;
+import com.feefighters.util.XmlMarshaller;
 
 public class ProcessorImpl implements Processor {
 

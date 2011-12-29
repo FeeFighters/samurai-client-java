@@ -1,9 +1,10 @@
-package com.feefighters.model;
+package com.feefighters;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.feefighters.util.XmlMarshaller;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;

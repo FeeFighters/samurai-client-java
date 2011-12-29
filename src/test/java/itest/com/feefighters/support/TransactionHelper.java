@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.feefighters.SamuraiGateway;
-import com.feefighters.model.Transaction;
+import com.feefighters.Transaction;
 
 public class TransactionHelper {
 
@@ -20,7 +20,7 @@ public class TransactionHelper {
 		
 		String paymentMethodToken = createPaymentMethod(newPaymentMethodRequest());
 		
-		Transaction transaction = gateway.processor().purchase(paymentMethodToken, 10.0, null);		
+		Transaction transaction = gateway.processor().purchase(paymentMethodToken, 10.0, null);
 		return transaction;
 	}
 }

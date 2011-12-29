@@ -1,4 +1,4 @@
-package com.feefighters.model;
+package com.feefighters.util;
 
 import org.apache.commons.lang.StringUtils;
 

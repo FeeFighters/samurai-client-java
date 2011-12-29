@@ -2,11 +2,10 @@ package com.feefighters.model;
 
 import java.io.IOException;
 
+import com.feefighters.Transaction;
 import org.apache.commons.io.IOUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import com.feefighters.model.Transaction;
 
 public class TransactionXmlTest {
 

@@ -1,7 +1,6 @@
 package com.feefighters;
 
-import com.feefighters.model.Transaction;
-import com.feefighters.model.TransactionOptions;
+import com.feefighters.util.TransactionOptions;
 
 public interface PaymentTransaction {
 

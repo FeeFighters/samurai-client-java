@@ -12,18 +12,11 @@ public class SamuraiGateway implements Serializable {
 	private String merchantPassword;
 	private String processorToken;
 	
-	private boolean debug;
-		
-	public SamuraiGateway(String merchantKey, String merchantPassword,
-			String processorToken) {
+	public SamuraiGateway(String merchantKey, String merchantPassword, String processorToken) {
 		super();
 		this.merchantKey = merchantKey;
 		this.merchantPassword = merchantPassword;
 		this.processorToken = processorToken;
-	}
-	
-	public void setDebug(boolean debug) {
-		this.debug = debug;
 	}
 	
 	public String getMerchantKey() {

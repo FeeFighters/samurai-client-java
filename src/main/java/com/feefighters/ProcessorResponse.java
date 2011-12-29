@@ -1,4 +1,4 @@
-package com.feefighters.model;
+package com.feefighters;
 
 import java.io.Serializable;
 

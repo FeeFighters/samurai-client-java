@@ -20,16 +20,18 @@ public class PaymentMethodHelper {
 	}
 
     public static class PaymentMethodRequest {
-		public String firstName = "Joe";
-        public String custom = "";
-        public String lastName = "FeeFighter";
-        public String cardNumber = "4111111111111111";
-        public String cvv = "123";
-        public String expiryMonth = "01";
-        public String expiryYear = "2014";
-        public String city = "Mystery Van";
+		public String firstName = "FirstName";
+        public String lastName = "LastName";
+        public String address1 = "123 Main St.";
+        public String address2 = "Apt #3";
+        public String city = "Chicago";
         public String state = "IL";
-        public String zip = "60607";
+        public String zip = "10101";
+        public String cardNumber = "4111-1111-1111-1111";
+        public String cvv = "123";
+        public String expiryMonth = "03";
+        public String expiryYear = "2015";
+        public String custom = "";
 	}
 
 	public static String createPaymentMethod(PaymentMethodRequest req) throws IOException {
@@ -43,6 +45,8 @@ public class PaymentMethodHelper {
                 + "&sandbox=" + true
 				+ "&credit_card[first_name]=" + req.firstName
 				+ "&credit_card[last_name]=" + req.lastName
+                + "&credit_card[address_1]=" + req.address1
+                + "&credit_card[address_1]=" + req.address2
 				+ "&credit_card[city]=" + req.city
 				+ "&credit_card[state]=" + req.state
 				+ "&credit_card[zip]=" + req.zip

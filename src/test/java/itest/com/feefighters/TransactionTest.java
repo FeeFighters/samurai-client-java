@@ -5,12 +5,12 @@ import static itest.com.feefighters.support.TransactionHelper.createPurchase;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.feefighters.Transaction;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.feefighters.SamuraiGateway;
-import com.feefighters.model.Transaction;
 
 public class TransactionTest {
 	private SamuraiGateway gateway;

@@ -1,18 +1,16 @@
 package itest.com.feefighters;
 
-import static itest.com.feefighters.support.PaymentMethodHelper.createPaymentMethod;
-import static itest.com.feefighters.support.PaymentMethodHelper.newPaymentMethodRequest;
 import static itest.com.feefighters.support.PaymentMethodHelper.PaymentMethodRequest;
 
 import java.io.IOException;
 import java.util.Properties;
 
+import com.feefighters.PaymentMethod;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.feefighters.SamuraiGateway;
-import com.feefighters.model.PaymentMethod;
 
 public class PaymentMethodTest {
 
@@ -26,13 +24,78 @@ public class PaymentMethodTest {
 		config = new Properties();
 		config.load(getClass().getResourceAsStream("/config.properties"));
 
-		paymentMethodRequest = newPaymentMethodRequest();
-		paymentMethodToken = createPaymentMethod(paymentMethodRequest);
-		
-		gateway = new SamuraiGateway(config.getProperty("merchantKey"), 
-				config.getProperty("merchantPassword"), config.getProperty("processorToken"));		
+		paymentMethodRequest = new PaymentMethodRequest();
+
+		gateway = new SamuraiGateway(
+            config.getProperty("merchantKey"),
+            config.getProperty("merchantPassword"),
+            config.getProperty("processorToken")
+        );
 	}
-	
+
+
+    @Test
+    public void S2SCreateShouldBeSuccessful() {}
+    @Test
+    public void S2SCreateFailOnInputCardNumberShouldReturnIsBlank() {}
+    @Test
+    public void S2SCreateFailOnInputCardNumberShouldReturnTooShort() {}
+    @Test
+    public void S2SCreateFailOnInputCardNumberShouldReturnTooLong() {}
+    @Test
+    public void S2SCreateFailOnInputCardNumberShouldReturnFailedChecksum() {}
+    @Test
+    public void S2SCreateFailOnInputCvvShouldReturnTooShort() {}
+    @Test
+    public void S2SCreateFailOnInputCvvShouldReturnTooLong() {}
+    @Test
+    public void S2SCreateFailOnInputCvvShouldReturnNotNumeric() {}
+    @Test
+    public void S2SCreateFailOnInputExpiryMonthShouldReturnIsBlank() {}
+    @Test
+    public void S2SCreateFailOnInputExpiryMonthShouldReturnIsInvalid() {}
+    @Test
+    public void S2SCreateFailOnInputExpiryYearShouldReturnIsBlank() {}
+    @Test
+    public void S2SCreateFailOnInputExpiryYearShouldReturnIsInvalid() {}
+
+    @Test
+    public void S2SUpdateShouldBeSuccessful() {}
+    @Test
+    public void S2SUpdateShouldBeSuccessfulPreservingSensitiveData() {}
+    @Test
+    public void S2SUpdateFailOnInputCardNumberShouldReturnTooShort() {}
+    @Test
+    public void S2SUpdateFailOnInputCardNumberShouldReturnTooLong() {}
+    @Test
+    public void S2SUpdateFailOnInputCardNumberShouldReturnFailedChecksum() {}
+    @Test
+    public void S2SUpdateFailOnInputCvvShouldReturnTooShort() {}
+    @Test
+    public void S2SUpdateFailOnInputCvvShouldReturnTooLong() {}
+    @Test
+    public void S2SUpdateFailOnInputExpiryMonthShouldReturnIsBlank() {}
+    @Test
+    public void S2SUpdateFailOnInputExpiryMonthShouldReturnIsInvalid() {}
+    @Test
+    public void S2SUpdateFailOnInputExpiryYearShouldReturnIsBlank() {}
+    @Test
+    public void S2SUpdateFailOnInputExpiryYearShouldReturnIsInvalid() {}
+
+    @Test
+    public void FindShouldBeSuccessful() {}
+    @Test
+    public void FindShouldFailOnAnInvalidToken() {}
+
+    @Test
+    public void RedactShouldBeSuccessful() {}
+
+    @Test
+    public void RetainShouldBeSuccessful() {}
+
+
+
+
 	@Test
 	public void shouldGetPaymentMethodFromServer() throws Exception {	
 		final PaymentMethod paymentMethod = gateway.processor().find(paymentMethodToken);
@@ -87,7 +150,7 @@ public class PaymentMethodTest {
 		Assert.assertNotNull(paymentMethod.getRetained());
 		Assert.assertFalse(paymentMethod.getRetained());
 		
-		final PaymentMethod returnedPaymentMethod = gateway.processor().retain(paymentMethod);		
+		final PaymentMethod returnedPaymentMethod = gateway.processor().retain(paymentMethod);
 		Assert.assertNotNull(returnedPaymentMethod);
 		Assert.assertNotNull(returnedPaymentMethod.getRetained());
 		Assert.assertTrue(returnedPaymentMethod.getRetained());

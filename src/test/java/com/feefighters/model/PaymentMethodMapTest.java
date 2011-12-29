@@ -5,18 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.feefighters.PaymentMethod;
+import com.feefighters.util.XmlMarshaller;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import com.feefighters.model.PaymentMethod;
-import com.feefighters.model.XmlMarshaller;
 
 public class PaymentMethodMapTest {
 	@Test
 	public void shouldSerializePaymentMethod() throws Exception {
 		// given		
-		final SimpleDateFormat sdf =  new SimpleDateFormat(XmlMarshaller.DEFAULT_DATE_FORMAT);		
+		final SimpleDateFormat sdf =  new SimpleDateFormat(XmlMarshaller.DEFAULT_DATE_FORMAT);
 		final Map<String, String> map = new HashMap<String, String>();
 		
 		final PaymentMethod paymentMethod = new PaymentMethod();

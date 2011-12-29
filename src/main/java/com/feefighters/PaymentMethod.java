@@ -1,9 +1,10 @@
-package com.feefighters.model;
+package com.feefighters;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
+import com.feefighters.util.XmlMarshaller;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -13,90 +14,90 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("payment_method")
 public class PaymentMethod implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@XStreamAlias("payment_method_token")
 	private String paymentMethodToken;
-	
+
 	@XStreamAlias("created_at")
 	private Date createdAt;
-	
+
 	@XStreamAlias("updated_at")
 	private Date updatedAt;
-	
+
 	@XStreamAlias("custom")
 	private String custom;
-	
+
 	@XStreamAlias("is_retained")
 	private Boolean retained;
-	
+
 	@XStreamAlias("is_redacted")
 	private Boolean redacted;
-	
+
 	@XStreamAlias("is_sensitive_data_valid")
 	private Boolean sensitiveDataValid;
 
-  @XStreamAlias("is_expiration_valid")
-  private Boolean expirationValid;
-	
+    @XStreamAlias("is_expiration_valid")
+    private Boolean expirationValid;
+
 	@XStreamAlias("messages")
 	private MessageList messageList = new MessageList();
-	
+
 	@XStreamAlias("last_four_digits")
 	private String lastFourDigits;
-	
+
 	@XStreamAlias("card_type")
 	private String cardType;
-	
+
 	@XStreamAlias("first_name")
 	private String firstName;
-	
+
 	@XStreamAlias("last_name")
 	private String lastName;
 
-  @XStreamAlias("card_number")
-  private String cardNumber;
+    @XStreamAlias("card_number")
+    private String cardNumber;
 
-  @XStreamAlias("cvv")
-  private String cvv;
-	
+    @XStreamAlias("cvv")
+    private String cvv;
+
 	@XStreamAlias("expiry_month")
 	private Integer expiryMonth;
-	
+
 	@XStreamAlias("expiry_year")
 	private Integer expiryYear;
-	
+
 	@XStreamAlias("address_1")
 	private String address1;
-	
+
 	@XStreamAlias("address_2")
 	private String address2;
-	
+
 	@XStreamAlias("city")
 	private String city;
-	
+
 	@XStreamAlias("state")
 	private String state;
-	
+
 	@XStreamAlias("zip")
 	private String zip;
-	
+
 	@XStreamAlias("country")
 	private String country;
-	
+
 	static {
 		XmlMarshaller.registerModelClass(PaymentMethod.class);
 	}
-	
+
 	public String toXml() {
 		return XmlMarshaller.toXml(this);
 	}
-	
+
 	public static PaymentMethod fromXml(String xml) {
 		return (PaymentMethod) XmlMarshaller.fromXml(xml);
 	}
-	
+
 	public static PaymentMethod fromValueMap(Map<String, String> map) {
 		PaymentMethod ret = new PaymentMethod();
 		ret.setAddress1(getValue(map, "address1", "address_1"));
@@ -112,15 +113,15 @@ public class PaymentMethod implements Serializable {
 		ret.setZip(getValue(map, "zip"));
 		return ret;
 	}
-	
+
 	protected static Integer getIntegerValue(Map<String, String> map, String key1, String key2) {
 		return NumberUtils.createInteger(getValue(map, key1, key2));
 	}
-	
+
 	protected static String getValue(Map<String, String> map, String key1, String key2) {
 		return map.get(key1) != null ? map.get(key1) : map.get(key2);
 	}
-	
+
 	protected static String getValue(Map<String, String> map, String key) {
 		return map.get(key);
 	}
@@ -128,7 +129,7 @@ public class PaymentMethod implements Serializable {
 	public String getId() {
 		return getPaymentMethodToken();
 	}
-	
+
 	public String getPaymentMethodToken() {
 		return paymentMethodToken;
 	}
@@ -228,7 +229,7 @@ public class PaymentMethod implements Serializable {
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
-	
+
 	public String getCvv() {
 		return cvv;
 	}
@@ -236,7 +237,7 @@ public class PaymentMethod implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-		
+
 	public Integer getExpiryMonth() {
 		return expiryMonth;
 	}
@@ -300,9 +301,9 @@ public class PaymentMethod implements Serializable {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+
 	@Override
-	public String toString() {		
+	public String toString() {
 		return new ToStringBuilder(this)
 			.append("address1", address1)
 			.append("address2", address2)
@@ -349,7 +350,7 @@ public class PaymentMethod implements Serializable {
 			.append(state)
 			.append(updatedAt)
 			.append(zip)
-			.toHashCode();		
+			.toHashCode();
 	}
 
 	@Override
@@ -386,6 +387,6 @@ public class PaymentMethod implements Serializable {
 			.append(zip, other.zip)
 			.isEquals();
 	}
-	
-	
+
+
 }

@@ -1,8 +1,8 @@
 package com.feefighters;
 
 import com.feefighters.http.Http;
-import com.feefighters.model.Transaction;
-import com.feefighters.model.TransactionOptions;
+import com.feefighters.util.TransactionHelper;
+import com.feefighters.util.TransactionOptions;
 
 public class PaymentTransactionImpl implements PaymentTransaction {
 
