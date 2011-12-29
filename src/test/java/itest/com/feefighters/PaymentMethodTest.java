@@ -1,12 +1,11 @@
 package itest.com.feefighters;
 
-import static itest.com.feefighters.PaymentMethodHelper.createPaymentMethod;
-import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequest;
-import itest.com.feefighters.PaymentMethodHelper.PaymentMethodRequest;
+import static itest.com.feefighters.support.PaymentMethodHelper.createPaymentMethod;
+import static itest.com.feefighters.support.PaymentMethodHelper.newPaymentMethodRequest;
+import static itest.com.feefighters.support.PaymentMethodHelper.PaymentMethodRequest;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;

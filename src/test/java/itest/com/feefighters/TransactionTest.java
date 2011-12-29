@@ -1,6 +1,6 @@
 package itest.com.feefighters;
 
-import static itest.com.feefighters.TransactionHelper.createPurchase;
+import static itest.com.feefighters.support.TransactionHelper.createPurchase;
 
 import java.io.IOException;
 import java.util.Properties;

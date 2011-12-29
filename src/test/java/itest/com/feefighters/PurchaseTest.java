@@ -1,8 +1,8 @@
 package itest.com.feefighters;
 
-import static itest.com.feefighters.PaymentMethodHelper.createPaymentMethod;
-import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequest;
-import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequestWithInvalidCreditCard;
+import static itest.com.feefighters.support.PaymentMethodHelper.createPaymentMethod;
+import static itest.com.feefighters.support.PaymentMethodHelper.newPaymentMethodRequest;
+import static itest.com.feefighters.support.PaymentMethodHelper.newPaymentMethodRequestWithInvalidCreditCard;
 
 import java.io.IOException;
 import java.util.Properties;

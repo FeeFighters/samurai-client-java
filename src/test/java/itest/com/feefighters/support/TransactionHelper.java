@@ -1,7 +1,7 @@
-package itest.com.feefighters;
+package itest.com.feefighters.support;
 
-import static itest.com.feefighters.PaymentMethodHelper.createPaymentMethod;
-import static itest.com.feefighters.PaymentMethodHelper.newPaymentMethodRequest;
+import static itest.com.feefighters.support.PaymentMethodHelper.createPaymentMethod;
+import static itest.com.feefighters.support.PaymentMethodHelper.newPaymentMethodRequest;
 
 import java.io.IOException;
 import java.util.Properties;
