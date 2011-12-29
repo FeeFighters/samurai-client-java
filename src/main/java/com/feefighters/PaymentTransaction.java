@@ -13,4 +13,5 @@ public interface PaymentTransaction {
 	
 	Transaction credit(Transaction transaction, Double amount, TransactionOptions options);
 	
+	Transaction reverse(Transaction transaction, Double amount, TransactionOptions options);
 }

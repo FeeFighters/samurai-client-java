@@ -33,6 +33,11 @@ public class PaymentTransactionImpl implements PaymentTransaction {
 		return execute("credit", transaction, amount, options);
 	}
 
+	@Override
+	public Transaction reverse(Transaction transaction, Double amount, TransactionOptions options) {
+		return execute("reverse", transaction, amount, options);
+	}
+
 	protected Transaction execute(String action, Transaction transaction, Double amount,
 			TransactionOptions options) {
 		final Transaction transactionRequest = TransactionHelper.generateTransactionAndSetOptions(options, false);
