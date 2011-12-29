@@ -47,9 +47,6 @@ public class SamuraiGateway implements Serializable {
 	}
 
 	private Http newHttpInstance() {
-		if(debug) {
-			Http.enableDebug();
-		}
 		return new Http(merchantKey, merchantPassword, "https://api.samurai.feefighters.com/v1");
 	}	
 	
