@@ -1,6 +1,6 @@
-package com.feefighters.util;
+package com.feefighters.samurai.util;
 
-import com.feefighters.Message;
+import com.feefighters.samurai.Message;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
@@ -18,19 +18,17 @@ public class MessageConverter implements Converter {
 	public void marshal(Object arg0, HierarchicalStreamWriter writer,
 			MarshallingContext arg2) {
 		Message m = (Message) arg0;
-		addAttributeIfNotNull(writer, "class", m.getMessageClass());
-		addAttributeIfNotNull(writer, "subclass", m.getMessageSubClass());
-		addAttributeIfNotNull(writer, "context", m.getContext());
-		addAttributeIfNotNull(writer, "key", m.getKey());
-		writer.setValue(m.getValue());		
+		addAttributeIfNotNull(writer, "subclass", m.subclass);
+		addAttributeIfNotNull(writer, "context", m.context);
+		addAttributeIfNotNull(writer, "key", m.key);
+		writer.setValue(m.description);
 	}	
 
 	@Override
 	public Object unmarshal(HierarchicalStreamReader reader,
 			UnmarshallingContext arg1) {
-		Message message = new Message(reader.getAttribute("context"), reader.getAttribute("key"), reader.getValue());
-		message.setMessageClass(reader.getAttribute("class"));
-		message.setMessageSubClass(reader.getAttribute("subclass"));
+		Message message = new Message(reader.getAttribute("subclass"), reader.getAttribute("context"), reader.getAttribute("key"), reader.getValue());
+		message.subclass = reader.getAttribute("subclass");
 		return message;
 	}
 	

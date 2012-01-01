@@ -1,4 +1,4 @@
-package com.feefighters.http;
+package com.feefighters.samurai.http;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

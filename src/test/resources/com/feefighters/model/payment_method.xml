@@ -6,19 +6,19 @@
   <is_retained type="boolean">false</is_retained>
   <is_redacted type="boolean">false</is_redacted>
   <is_sensitive_data_valid type="boolean">false</is_sensitive_data_valid>
-  <messages type="array">
-    <message class="error" context="input.cvv" key="too_long"></message>
-  </messages>
-  <last_four_digits>1111</last_four_digits>
-  <card_type></card_type>
   <first_name>Joe</first_name>
   <last_name>FeeFighter</last_name>
-  <expiry_month type="integer">1</expiry_month>
-  <expiry_year type="integer">2011</expiry_year>
   <address_1></address_1>
   <address_2></address_2>
   <city></city>
   <state></state>
   <zip></zip>
   <country></country>
+  <expiry_month type="integer">1</expiry_month>
+  <expiry_year type="integer">2011</expiry_year>
+  <last_four_digits>1111</last_four_digits>
+  <card_type></card_type>
+  <messages type="array">
+    <message subclass="error" context="input.cvv" key="too_long">The CVV was too long.</message>
+  </messages>
 </payment_method>

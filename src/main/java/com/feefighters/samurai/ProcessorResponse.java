@@ -1,7 +1,10 @@
-package com.feefighters;
+package com.feefighters.samurai;
 
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import com.feefighters.samurai.util.XmlMarshaller;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -14,62 +17,25 @@ public class ProcessorResponse implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@XStreamAlias("success")
-	private Boolean success;
+	public Boolean success;
 	
 	@XStreamAlias("messages")
-	private MessageList messageList = new MessageList();
+    public MessageList messages = new MessageList();
 	
 	@XStreamAlias("processor_data")
-	private String processorData;
+    public String processorData;
 	
 	@XStreamAlias("avs_result_code")
-	private String avsResultCode;
+    public String avsResultCode;
 
     @XStreamAlias("cvv_result_code")
-    private String cvvResultCode;
-
-	public void setSuccess(Boolean success) {
-		this.success = success;
-	}
-	
-	public Boolean getSuccess() {
-		return success;
-	}
-	
-	public MessageList getMessageList() {
-		return messageList;
-	}
-    public void setMessageList(MessageList messageList) {
-        this.messageList = messageList;
-    }
-
-	public void setProcessorData(String processorData) {
-		this.processorData = processorData;
-	}
-	
-	public String getProcessorData() {
-		return processorData;
-	}
-	
-	public void setAvsResultCode(String avsResultCode) {
-		this.avsResultCode = avsResultCode;
-	}
-	public String getAvsResultCode() {
-		return avsResultCode;
-	}
-
-    public void setCvvResultCode(String cvvResultCode) {
-        this.cvvResultCode = cvvResultCode;
-    }
-    public String getCvvResultCode() {
-        return cvvResultCode;
-    }
+    public String cvvResultCode;
 
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder()
 			.append(avsResultCode)
-			.append(messageList)
+			.append(messages)
 			.append(processorData)
 			.append(success)
 			.toHashCode();
@@ -89,7 +55,7 @@ public class ProcessorResponse implements Serializable{
 		final ProcessorResponse other = (ProcessorResponse) obj;
 		return new EqualsBuilder()
 			.append(avsResultCode, other.avsResultCode)
-			.append(messageList, other.messageList)
+			.append(messages, other.messages)
 			.append(processorData, other.processorData)
 			.append(success, other.success)
 			.isEquals();
@@ -99,10 +65,21 @@ public class ProcessorResponse implements Serializable{
 	public String toString() {
 		return new ToStringBuilder(this)
 			.append("avsResultCode", this.avsResultCode)		
-			.append("messageList", this.messageList)
+			.append("messageList", this.messages)
 			.append("processorData", this.processorData)
 			.append("success", this.success)
 			.toString();
 	}
 	
+    public static ProcessorResponse fromErrorXml(String errorXml) {
+        ProcessorResponse processorResponse = new ProcessorResponse();
+        Pattern pattern = Pattern.compile("<messages[^>]*>.*</messages>", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(errorXml);
+        matcher.find();
+        errorXml = matcher.group();
+        processorResponse.messages = (MessageList) XmlMarshaller.fromXml(errorXml);
+        processorResponse.success = false;
+        return processorResponse;
+    }
+    
 }

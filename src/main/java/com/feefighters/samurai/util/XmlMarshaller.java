@@ -1,4 +1,4 @@
-package com.feefighters.util;
+package com.feefighters.samurai.util;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -52,7 +52,7 @@ public final class XmlMarshaller {
 		}
 	}
 		
-	protected static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z";
+	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss z";
 	private static final String[] DATE_FORMATS = { };
 	static {		
 		
@@ -72,4 +72,8 @@ public final class XmlMarshaller {
 	public static Object fromXml(String xml) {
 		return xstream.fromXML(xml);
 	}
+
+    public static Object fromXml(String xml, Object root) {
+        return xstream.fromXML(xml, root);
+    }
 }

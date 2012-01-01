@@ -1,9 +1,10 @@
-package com.feefighters.http;
+package com.feefighters.samurai.http;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+import com.feefighters.samurai.SamuraiGateway;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
@@ -28,7 +29,7 @@ import org.apache.http.params.HttpProtocolParams;
 public class Http {
 
     private static final String CONTENT_CHARSET = "UTF-8";
-	private static final String SAMURAI_USER_AGENT = "Samurai Java Client";
+	private static final String SAMURAI_USER_AGENT = "Samurai Java Client "+SamuraiGateway.Version;
 	private static final String DEFAULT_CONTENT_TYPE = "application/xml";
 
     private String username;

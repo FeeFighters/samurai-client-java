@@ -1,10 +1,12 @@
-package com.feefighters;
+package com.feefighters.samurai;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.feefighters.util.XmlMarshaller;
+import com.feefighters.samurai.util.XmlMarshaller;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -30,6 +32,7 @@ public class MessageList implements Serializable {
 	}
 	
 	public List<Message> getList() {
+        if (list == null) { list = new ArrayList<Message>(); }
 		return list;
 	}
 	
@@ -68,5 +71,12 @@ public class MessageList implements Serializable {
 			.isEquals();
 	}
 
-	
+    public static MessageList fromErrorXml(String errorXml) {
+        Pattern pattern = Pattern.compile("<messages[^>]*>.*</messages>", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(errorXml);
+        matcher.find();
+        errorXml = matcher.group();
+        return (MessageList) XmlMarshaller.fromXml(errorXml);
+    }
+
 }

@@ -26,17 +26,17 @@
     <is_retained type="boolean">false</is_retained>
     <is_redacted type="boolean">false</is_redacted>
     <is_sensitive_data_valid type="boolean">true</is_sensitive_data_valid>
-    <last_four_digits>1111</last_four_digits>
-    <card_type></card_type>
     <first_name>Joe</first_name>
     <last_name>FeeFighter</last_name>
-    <expiry_month type="integer">1</expiry_month>
-    <expiry_year type="integer">2011</expiry_year>
     <address_1></address_1>
     <address_2></address_2>
     <city></city>
     <state></state>
     <zip></zip>
     <country></country>
+    <expiry_month type="integer">1</expiry_month>
+    <expiry_year type="integer">2011</expiry_year>
+    <last_four_digits>1111</last_four_digits>
+    <card_type></card_type>
   </payment_method>
 </transaction>
