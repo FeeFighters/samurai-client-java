@@ -189,6 +189,29 @@ public class PaymentMethodTest {
         Assert.assertEquals((int)pm.expiryYear, Integer.parseInt(updateParams.get("expiryYear")));
     }
     @Test
+    public void S2SUpdateShouldBeSuccessfulWithPartialData() {
+        PaymentMethod pm = PaymentMethod.create(params);
+        updateParams.remove("address2");
+        updateParams.remove("city");
+        pm.updateAttributes(updateParams);
+        pm.save();
+        pm = PaymentMethod.find(pm.paymentMethodToken);
+
+        Assert.assertEquals((boolean)pm.sensitiveDataValid, true);
+        Assert.assertEquals((boolean)pm.expirationValid, true);
+        Assert.assertEquals(pm.firstName, updateParams.get("firstName"));
+        Assert.assertEquals(pm.lastName, updateParams.get("lastName"));
+        Assert.assertEquals(pm.address1, updateParams.get("address1"));
+        Assert.assertEquals(pm.address2, params.get("address2"));
+        Assert.assertEquals(pm.city, params.get("city"));
+        Assert.assertEquals(pm.state, updateParams.get("state"));
+        Assert.assertEquals(pm.zip, updateParams.get("zip"));
+        Assert.assertEquals(pm.lastFourDigits, updateParams.get("cardNumber").replaceAll("-", "").substring(12, 16));
+        Assert.assertEquals((int)pm.expiryMonth, Integer.parseInt(updateParams.get("expiryMonth")));
+        Assert.assertEquals((int)pm.expiryYear, Integer.parseInt(updateParams.get("expiryYear")));
+    }
+
+    @Test
     public void S2SUpdateShouldBeSuccessfulPreservingSensitiveData() {
         PaymentMethod pm = PaymentMethod.create(params);
         updateParams.put("cardNumber", "****-****-****-****");
